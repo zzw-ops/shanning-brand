@@ -429,7 +429,9 @@ export default function Home() {
       <section id="tea-ai" className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <Link 
-href="/menu"
+href="https://sanitea-ai.vercel.app/"
+target="_blank"
+rel="noopener noreferrer"
             className="group block relative rounded-[3rem] overflow-hidden bg-primary p-12 md:p-20 text-white shadow-2xl transition-transform hover:scale-[1.01]"
           >
             <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/10 -skew-x-12 translate-x-1/4 pointer-events-none group-hover:bg-secondary/20 transition-colors duration-500"></div>
