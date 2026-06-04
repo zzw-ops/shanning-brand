@@ -1,14 +1,14 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Heart, Leaf } from 'lucide-react';
+import { ArrowRight, Heart } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { MenuModal } from './MenuModal';
 
 export const seasonalMenu = {
   spring: {
@@ -122,13 +122,11 @@ export const seasonalMenu = {
 };
 
 export function SeasonalMenu() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <section id="menu" className="py-24 bg-primary/5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
-          <Badge className="bg-secondary mb-2">SEASONAL MENU</Badge>
+          <Badge className="bg-secondary mb-2 text-white border-none px-4 py-1">SEASONAL MENU</Badge>
           <h2 className="text-4xl font-headline font-bold text-primary">四季系列菜单</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">基于药食同源理念，顺应天时设计。每一杯都是东方智慧与现代口味的精妙平衡。</p>
         </div>
@@ -139,7 +137,7 @@ export function SeasonalMenu() {
               <TabsTrigger 
                 key={season.id} 
                 value={season.id} 
-                className="data-[state=active]:bg-primary data-[state=active]:text-white h-full rounded-full transition-all"
+                className="data-[state=active]:bg-primary data-[state=active]:text-white h-full rounded-full transition-all text-xs md:text-sm"
               >
                 {season.name}
               </TabsTrigger>
@@ -175,7 +173,7 @@ export function SeasonalMenu() {
                             <h4 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors">{product.name}</h4>
                             <div className="flex gap-1">
                               {product.tags.map(tag => (
-                                <Badge key={tag} variant="secondary" className="bg-secondary/10 text-secondary text-[10px] py-0">{tag}</Badge>
+                                <Badge key={tag} variant="secondary" className="bg-secondary/10 text-secondary text-[10px] py-0 border-none">{tag}</Badge>
                               ))}
                             </div>
                           </div>
@@ -187,13 +185,14 @@ export function SeasonalMenu() {
                         </div>
                       ))}
                     </div>
-                    <Button 
-                      onClick={() => setIsModalOpen(true)}
-                      variant="outline" 
-                      className="border-primary text-primary font-bold w-full rounded-full h-12 hover:bg-primary hover:text-white transition-all group/btn"
-                    >
-                      查看完整季节配方表 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Button>
+                    <Link href="/menu" target="_blank" className="block">
+                      <Button 
+                        variant="outline" 
+                        className="border-primary text-primary font-bold w-full rounded-full h-12 hover:bg-primary hover:text-white transition-all group/btn shadow-sm"
+                      >
+                        查看完整季节配方表 <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </TabsContent>
@@ -201,7 +200,6 @@ export function SeasonalMenu() {
           })}
         </Tabs>
       </div>
-      <MenuModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </section>
   );
 }
