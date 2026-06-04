@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/brand/Navbar';
-import { TeaRecommendation } from '@/components/brand/TeaRecommendation';
 import { SeasonalMenu } from '@/components/brand/SeasonalMenu';
 import { ContactSection } from '@/components/brand/ContactSection';
 import { Footer } from '@/components/brand/Footer';
@@ -41,18 +40,6 @@ export default function Home() {
   const getImg = (id: string) => PlaceHolderImages.find(img => img.id === id);
   const heroImg = getImg('hero-main');
   const macauImg = getImg('macau-lifestyle');
-
-  const scrollToContact = (type?: string) => {
-    const el = document.getElementById('contact');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-      if (type) {
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent('set-consult-type', { detail: type }));
-        }, 100);
-      }
-    }
-  };
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -346,8 +333,56 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Interactive Section */}
-      <TeaRecommendation />
+      {/* AI Entrance Section (Teaser with external link) */}
+      <section id="tea-ai" className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <Link 
+            href="https://www.google.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group block relative rounded-[3rem] overflow-hidden bg-primary p-12 md:p-20 text-white shadow-2xl transition-transform hover:scale-[1.01]"
+          >
+            {/* Decorative background elements */}
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/10 -skew-x-12 translate-x-1/4 pointer-events-none group-hover:bg-secondary/20 transition-colors duration-500"></div>
+            <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+            
+            <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-8">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-6 h-6 text-secondary animate-pulse" />
+                  <span className="text-sm font-bold tracking-[0.3em] uppercase">AI Intelligent Selection</span>
+                </div>
+                <h2 className="text-5xl md:text-7xl font-headline font-bold leading-tight">
+                  发现适合您的<br />那一杯草本灵感
+                </h2>
+                <p className="text-xl text-white/70 max-w-lg leading-relaxed">
+                  基于东方智慧与大数据模型，为您提供最契合当下的饮用建议。无论阴晴圆缺，或是心情起伏，山宁 AI 都能为您精准调配专属于您的自然之味。
+                </p>
+                <div className="pt-4">
+                  <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-10 h-14 text-lg font-bold group/btn">
+                    立即开启智慧选茶 <ChevronRight className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-2" />
+                  </Button>
+                </div>
+              </div>
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10 lg:block hidden">
+                <Image 
+                  src="https://picsum.photos/seed/shanning-ai-teaser/800/450" 
+                  alt="AI 智慧选茶"
+                  fill
+                  className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-1000"
+                  data-ai-hint="digital future tea"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 text-white group-hover:scale-125 transition-transform">
+                    <Sparkles className="w-8 h-8" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </section>
 
       {/* 4. Seasonal Menu */}
       <SeasonalMenu />
@@ -443,7 +478,7 @@ export default function Home() {
                 <li className="flex items-center gap-3"><Check className="w-4 h-4 text-white" /> 极强的社交媒体话题感</li>
               </ul>
               <Button 
-                onClick={() => scrollToContact('加盟咨询')}
+                onClick={() => scrollToSection('contact')}
                 className="w-full bg-white text-secondary hover:bg-white/90 font-bold h-14 rounded-2xl text-lg mt-4 shadow-lg shadow-black/20"
               >
                 立即加盟
@@ -574,7 +609,7 @@ export default function Home() {
                         fill 
                         className={cn(
                           "object-cover transition-all duration-700",
-                          isActive ? "scale-110 grayscale-0" : "scale-100 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80"
+                          isActive ? "scale-110 grayscale-0" : "scale-100 grayscale opacity-44 group-hover:grayscale-0 group-hover:opacity-80"
                         )}
                         data-ai-hint={img.imageHint}
                       />
@@ -642,7 +677,7 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-6">
             <Button 
               size="lg" 
-              onClick={() => scrollToContact('加盟咨询')}
+              onClick={() => scrollToSection('contact')}
               className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-12 h-16 text-xl shadow-2xl shadow-secondary/20 transition-all active:scale-95 border-none"
             >
               立即咨询加盟
