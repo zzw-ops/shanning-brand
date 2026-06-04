@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -321,11 +320,13 @@ export default function Home() {
               { icon: <ShieldCheck className="w-7 h-7" />, title: "纯净配方", desc: "坚持自然、低糖、0 添加化学成分的原则，建立深度品牌信任。" },
               { icon: <Palette className="w-7 h-7" />, title: "东方美学", desc: "结合传统纹理与现代极简，让每一杯茶饮都成为行走的文化社交名片。" }
             ].map((item, i) => (
-              <div key={i} className="group p-10 border border-primary/5 bg-white/50 backdrop-blur-sm rounded-[2rem] hover:border-secondary/20 transition-all duration-500 hover:bg-secondary/[0.02]">
-                <div className="w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-secondary group-hover:text-white transition-all">
-                  {item.icon}
+              <div key={i} className="group p-10 border border-primary/5 bg-white/50 backdrop-blur-sm rounded-[2rem] hover:border-secondary/20 transition-all duration-500 hover:bg-white hover:shadow-2xl hover:shadow-secondary/20 hover:-translate-y-2">
+                <div className="w-16 h-16 bg-white shadow-lg rounded-2xl flex items-center justify-center text-primary mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:ring-4 group-hover:ring-secondary/20 group-hover:text-secondary group-hover:shadow-secondary/20">
+                  <div className="transition-all duration-500 transform group-hover:scale-110">
+                    {item.icon}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-primary">{item.title}</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary transition-colors group-hover:text-secondary">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             ))}
@@ -446,7 +447,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20 space-y-6">
             <h2 className="text-5xl font-headline font-bold">不只是茶饮，而是草本生活方式</h2>
-            <p className="text-primary-foreground/60 text-lg">多维度对比，见证山宁如何定义新标准</p>
+            <p className="text-primary-foreground/60 text-lg">多维度对比，见证山宁如何 definition 新标准</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-0 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
@@ -478,7 +479,13 @@ export default function Home() {
                 <li className="flex items-center gap-3"><Check className="w-4 h-4 text-white" /> 极强的社交媒体话题感</li>
               </ul>
               <Button 
-                onClick={() => scrollToSection('contact')}
+                onClick={() => {
+                  const el = document.getElementById('contact');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                    window.dispatchEvent(new CustomEvent('set-consult-type', { detail: '加盟咨询' }));
+                  }
+                }}
                 className="w-full bg-white text-secondary hover:bg-white/90 font-bold h-14 rounded-2xl text-lg mt-4 shadow-lg shadow-black/20"
               >
                 立即加盟
@@ -609,7 +616,7 @@ export default function Home() {
                         fill 
                         className={cn(
                           "object-cover transition-all duration-700",
-                          isActive ? "scale-110 grayscale-0" : "scale-100 grayscale opacity-44 group-hover:grayscale-0 group-hover:opacity-80"
+                          isActive ? "scale-110 grayscale-0" : "scale-100 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80"
                         )}
                         data-ai-hint={img.imageHint}
                       />
@@ -677,7 +684,13 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-6">
             <Button 
               size="lg" 
-              onClick={() => scrollToSection('contact')}
+              onClick={() => {
+                const el = document.getElementById('contact');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                  window.dispatchEvent(new CustomEvent('set-consult-type', { detail: '加盟咨询' }));
+                }
+              }}
               className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-12 h-16 text-xl shadow-2xl shadow-secondary/20 transition-all active:scale-95 border-none"
             >
               立即咨询加盟
@@ -685,7 +698,7 @@ export default function Home() {
             <Button 
               size="lg" 
               variant="outline" 
-              onClick={() => scrollToSection('menu')}
+              onClick={() => window.open('/menu', '_blank')}
               className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white rounded-full px-12 h-16 text-xl transition-all shadow-lg hover:shadow-secondary/20"
             >
               查看品牌手册
