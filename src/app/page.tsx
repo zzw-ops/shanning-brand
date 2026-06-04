@@ -247,19 +247,19 @@ export default function Home() {
             {[
               { 
                 imgId: "vision-herb",
-                icon: <Leaf className="w-10 h-10 text-primary" />, 
+                icon: <Leaf className="w-10 h-10" />, 
                 title: "草本入饮", 
                 desc: "精选药食同源草本原料，保留天然植物活性。通过现代冷泡与萃取工艺，释放自然草本之美。" 
               },
               { 
                 imgId: "vision-season",
-                icon: <Wind className="w-10 h-10 text-primary" />, 
+                icon: <Wind className="w-10 h-10" />, 
                 title: "四季调养", 
                 desc: "顺应二十四节气，根据气候变化设计差异化饮品。在春生、夏长、秋收、冬藏中平衡身体需求。" 
               },
               { 
                 imgId: "vision-young",
-                icon: <Users className="w-10 h-10 text-primary" />, 
+                icon: <Users className="w-10 h-10" />, 
                 title: "年轻表达", 
                 desc: "用现代视觉语言重塑东方养生。打造高颜值、社交媒体友好且富有文化深度的品牌体验。" 
               }
@@ -280,8 +280,8 @@ export default function Home() {
                     <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500"></div>
                   </div>
                   <CardHeader className="p-10 pb-4 space-y-6 relative">
-                    <div className="w-20 h-20 -mt-20 relative z-10 bg-white shadow-xl rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
-                      <div className="group-hover:text-white transition-colors">
+                    <div className="w-20 h-20 -mt-20 relative z-10 bg-white shadow-xl rounded-3xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:ring-4 group-hover:ring-secondary/20 group-hover:shadow-secondary/20">
+                      <div className="text-primary group-hover:text-secondary transition-all duration-500 transform group-hover:scale-110">
                         {card.icon}
                       </div>
                     </div>
