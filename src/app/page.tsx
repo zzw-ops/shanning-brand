@@ -24,13 +24,16 @@ import {
   Award,
   Sparkles,
   Zap,
-  Check
+  Check,
+  MapPin,
+  ArrowRight
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
-  const heroImg = PlaceHolderImages.find(img => img.id === 'hero-main');
-  const macauImg = PlaceHolderImages.find(img => img.id === 'macau-lifestyle');
+  const getImg = (id: string) => PlaceHolderImages.find(img => img.id === id);
+  const heroImg = getImg('hero-main');
+  const macauImg = getImg('macau-lifestyle');
 
   const scrollToContact = (type?: string) => {
     const el = document.getElementById('contact');
@@ -134,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* 2. Brand Concept */}
-      <section id="brand" className="py-24 bg-primary/5">
+      <section id="brand" className="py-24 bg-primary/5 relative">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
             <Badge className="bg-secondary px-4 py-1 text-xs tracking-widest uppercase">Our Vision</Badge>
@@ -147,42 +150,66 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-10">
             {[
               { 
+                imgId: "vision-herb",
                 icon: <Leaf className="w-10 h-10 text-primary" />, 
                 title: "草本入饮", 
                 desc: "精选药食同源草本原料，保留天然植物活性。通过现代冷泡与萃取工艺，释放自然草本之美。" 
               },
               { 
+                imgId: "vision-season",
                 icon: <Wind className="w-10 h-10 text-primary" />, 
                 title: "四季调养", 
                 desc: "顺应二十四节气，根据气候变化设计差异化饮品。在春生、夏长、秋收、冬藏中平衡身体需求。" 
               },
               { 
+                imgId: "vision-young",
                 icon: <Users className="w-10 h-10 text-primary" />, 
                 title: "年轻表达", 
                 desc: "用现代视觉语言重塑东方养生。打造高颜值、社交媒体友好且富有文化深度的品牌体验。" 
               }
-            ].map((card, i) => (
-              <Card key={i} className="border-none shadow-sm hover:shadow-2xl transition-all duration-500 group rounded-[2.5rem] bg-white">
-                <CardHeader className="p-10 pb-4 space-y-6">
-                  <div className="w-20 h-20 bg-primary/5 rounded-3xl flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
-                    <div className="group-hover:text-white transition-colors">
-                      {card.icon}
-                    </div>
+            ].map((card, i) => {
+              const img = getImg(card.imgId);
+              return (
+                <Card key={i} className="border-none shadow-sm hover:shadow-2xl transition-all duration-500 group rounded-[2.5rem] bg-white overflow-hidden">
+                  <div className="relative h-48 overflow-hidden">
+                    {img && (
+                      <Image 
+                        src={img.imageUrl} 
+                        alt={card.title} 
+                        fill 
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        data-ai-hint={img.imageHint}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500"></div>
                   </div>
-                  <CardTitle className="text-2xl font-headline font-bold text-primary">{card.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="px-10 pb-10">
-                  <p className="text-muted-foreground leading-relaxed">{card.desc}</p>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardHeader className="p-10 pb-4 space-y-6 relative">
+                    <div className="w-20 h-20 -mt-20 relative z-10 bg-white shadow-xl rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
+                      <div className="group-hover:text-white transition-colors">
+                        {card.icon}
+                      </div>
+                    </div>
+                    <CardTitle className="text-2xl font-headline font-bold text-primary">{card.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="px-10 pb-10">
+                    <p className="text-muted-foreground leading-relaxed">{card.desc}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* 3. Product Highlights */}
-      <section id="products" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="products" className="py-24 bg-white relative">
+        {/* Rich Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none overflow-hidden">
+          <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-secondary rounded-full blur-[120px]"></div>
+          <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-primary rounded-full blur-[120px]"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <div className="space-y-4">
               <Badge variant="outline" className="border-primary/20 text-primary font-bold">CORE VALUES</Badge>
@@ -199,7 +226,7 @@ export default function Home() {
               { icon: <ShieldCheck className="w-7 h-7" />, title: "纯净配方", desc: "坚持自然、低糖、0 添加化学成分的原则，建立深度品牌信任。" },
               { icon: <Palette className="w-7 h-7" />, title: "东方美学", desc: "结合传统纹理与现代极简，让每一杯茶饮都成为行走的文化社交名片。" }
             ].map((item, i) => (
-              <div key={i} className="group p-10 border border-primary/5 rounded-[2rem] hover:border-secondary/20 transition-all duration-500 hover:bg-secondary/[0.02]">
+              <div key={i} className="group p-10 border border-primary/5 bg-white/50 backdrop-blur-sm rounded-[2rem] hover:border-secondary/20 transition-all duration-500 hover:bg-secondary/[0.02]">
                 <div className="w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-secondary group-hover:text-white transition-all">
                   {item.icon}
                 </div>
@@ -232,6 +259,13 @@ export default function Home() {
                   data-ai-hint={macauImg.imageHint}
                 />
               )}
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+              <div className="absolute bottom-8 left-8 flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 text-white">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <span className="text-white font-bold tracking-widest text-lg uppercase">中国 · 澳门特别行政区</span>
+              </div>
             </div>
           </div>
           <div className="space-y-10">
@@ -312,8 +346,18 @@ export default function Home() {
       </section>
 
       {/* 7. Operations Strategy */}
-      <section id="strategy" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="strategy" className="py-24 bg-white relative">
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+          <div className="absolute inset-0 bg-texture"></div>
+          <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="currentColor" strokeWidth="1"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
               <div className="space-y-4">
@@ -366,21 +410,38 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { name: "核心商业区", crowd: "职场白领、购物人群", advice: "适合开设品牌旗舰店，强化视觉传达。" },
-              { name: "高校周边", crowd: "Z世代学生、年轻教师", advice: "侧重社交互动与外带便利，打造打卡点。" },
-              { name: "文创街区", crowd: "精致生活追求者、游客", advice: "结合美学工坊概念，提供深度沉浸体验。" },
-              { name: "旅游景区", crowd: "外地游客、文化寻根者", advice: "适合伴手礼化产品，推广澳门草本名片。" },
-              { name: "写字楼附近", crowd: "商务茶歇、外卖刚需", advice: "主打高效快取，建立稳定的日常订购习惯。" }
-            ].map((loc, i) => (
-              <div key={i} className="bg-white p-8 rounded-[2rem] border border-primary/5 text-center hover:bg-primary hover:text-white transition-all duration-500 group cursor-default shadow-sm hover:shadow-2xl">
-                <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/20 transition-all">
-                  <Sparkles className="w-6 h-6 text-secondary group-hover:text-white" />
+              { imgId: "loc-commercial", name: "核心商业区", crowd: "职场白领、购物人群", advice: "适合开设品牌旗舰店，强化视觉传达。" },
+              { imgId: "loc-university", name: "高校周边", crowd: "Z世代学生、年轻教师", advice: "侧重社交互动与外带便利，打造打卡点。" },
+              { imgId: "loc-cultural", name: "文创街区", crowd: "精致生活追求者、游客", advice: "结合美学工坊概念，提供深度沉浸体验。" },
+              { imgId: "loc-tourist", name: "旅游景区", crowd: "外地游客、文化寻根者", advice: "适合伴手礼化产品，推广澳门草本名片。" },
+              { imgId: "loc-office", name: "写字楼附近", crowd: "商务茶歇、外卖刚需", advice: "主打高效快取，建立稳定的日常订购习惯。" }
+            ].map((loc, i) => {
+              const img = getImg(loc.imgId);
+              return (
+                <div key={i} className="bg-white rounded-[2rem] border border-primary/5 overflow-hidden hover:shadow-2xl transition-all duration-500 group cursor-default shadow-sm">
+                  <div className="relative h-32">
+                    {img && (
+                      <Image 
+                        src={img.imageUrl} 
+                        alt={loc.name} 
+                        fill 
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        data-ai-hint={img.imageHint}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-primary/40 group-hover:bg-transparent transition-colors"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                       <Sparkles className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                  <div className="p-6 text-center group-hover:bg-primary group-hover:text-white transition-colors duration-500">
+                    <h4 className="font-bold text-lg mb-2">{loc.name}</h4>
+                    <p className="text-[10px] text-secondary font-bold uppercase tracking-widest mb-4 group-hover:text-white/60">{loc.crowd}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed group-hover:text-white/80">{loc.advice}</p>
+                  </div>
                 </div>
-                <h4 className="font-bold text-lg mb-2">{loc.name}</h4>
-                <p className="text-[10px] text-secondary font-bold uppercase tracking-widest mb-4 group-hover:text-white/60">{loc.crowd}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed group-hover:text-white/80">{loc.advice}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -410,7 +471,7 @@ export default function Home() {
                 const el = document.getElementById('menu');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="border-white text-white hover:bg-white/10 rounded-full px-12 h-16 text-xl"
+              className="border-secondary text-secondary hover:bg-secondary hover:text-white rounded-full px-12 h-16 text-xl transition-all"
             >
               查看品牌手册
             </Button>
