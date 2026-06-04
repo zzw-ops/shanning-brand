@@ -338,7 +338,7 @@ export default function Home() {
       <section id="tea-ai" className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <Link 
-            href="https://www.google.com" 
+            href="https://9000-firebase-studio-1780578282407.cluster-yylgzpipxrar4v4a72liastuqy.cloudworkstations.dev" 
             target="_blank" 
             rel="noopener noreferrer"
             className="group block relative rounded-[3rem] overflow-hidden bg-primary p-12 md:p-20 text-white shadow-2xl transition-transform hover:scale-[1.01]"
