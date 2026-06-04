@@ -1,0 +1,47 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-tea",
+      "description": "Premium Chinese herbal tea in a glass cup with osmanthus flowers and a wooden background",
+      "imageUrl": "https://picsum.photos/seed/shanning-hero/1200/800",
+      "imageHint": "herbal tea osmanthus"
+    },
+    {
+      "id": "spring-tea",
+      "description": "Soothing flower tea with jasmine and tangerine peel",
+      "imageUrl": "https://picsum.photos/seed/spring/600/400",
+      "imageHint": "flower tea"
+    },
+    {
+      "id": "summer-tea",
+      "description": "Refreshing cold brew herbal tea with lotus leaf",
+      "imageUrl": "https://picsum.photos/seed/summer/600/400",
+      "imageHint": "cold tea"
+    },
+    {
+      "id": "autumn-tea",
+      "description": "Moistening tea with red dates and goji berries",
+      "imageUrl": "https://picsum.photos/seed/autumn/600/400",
+      "imageHint": "goji tea"
+    },
+    {
+      "id": "winter-tea",
+      "description": "Warming ginger and ginseng tea",
+      "imageUrl": "https://picsum.photos/seed/winter/600/400",
+      "imageHint": "ginger tea"
+    },
+    {
+      "id": "macau-street",
+      "description": "Traditional Macau street with modern aesthetic vibe",
+      "imageUrl": "https://picsum.photos/seed/macau/800/600",
+      "imageHint": "Macau street"
+    },
+    {
+      "id": "brand-texture",
+      "description": "Subtle traditional Chinese silk or paper texture",
+      "imageUrl": "https://picsum.photos/seed/texture/1920/1080",
+      "imageHint": "paper texture"
+    }
+  ]
+}
