@@ -1,84 +1,132 @@
 
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/brand/Navbar';
 import { TeaRecommendation } from '@/components/brand/TeaRecommendation';
+import { SeasonalMenu } from '@/components/brand/SeasonalMenu';
+import { ContactSection } from '@/components/brand/ContactSection';
+import { Footer } from '@/components/brand/Footer';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Leaf, 
   Wind, 
-  Sun, 
-  Heart, 
-  Target, 
   Users, 
+  Target, 
+  Heart, 
   ShieldCheck, 
   Palette, 
-  LineChart, 
-  MapPin, 
-  ArrowRight,
   TrendingUp,
-  Award
+  Award,
+  Sparkles,
+  Zap,
+  Check
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
-  const heroImg = PlaceHolderImages.find(img => img.id === 'hero-tea');
-  const macauImg = PlaceHolderImages.find(img => img.id === 'macau-street');
+  const heroImg = PlaceHolderImages.find(img => img.id === 'hero-main');
+  const macauImg = PlaceHolderImages.find(img => img.id === 'macau-lifestyle');
+
+  const scrollToContact = (type?: string) => {
+    const el = document.getElementById('contact');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      if (type) {
+        window.dispatchEvent(new CustomEvent('set-consult-type', { detail: type }));
+      }
+    }
+  };
+
+  const scrollToProducts = () => {
+    const el = document.getElementById('products');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToBrand = () => {
+    const el = document.getElementById('brand');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <main className="min-h-screen">
       <Navbar />
 
       {/* 1. Hero Section */}
-      <section id="home" className="relative pt-32 pb-20 overflow-hidden">
+      <section id="home" className="relative pt-32 pb-20 overflow-hidden min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-full border border-primary/10 text-primary text-sm font-medium">
-              <SparklesIcon className="w-4 h-4 text-secondary" />
+          <div className="space-y-10 animate-fade-in-up">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full border border-primary/10 text-primary text-xs font-bold tracking-widest uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-secondary" />
               <span>澳门新式中药健康茶饮品牌</span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-headline font-bold text-primary leading-tight">
-              山宁｜新式中药<br />健康茶饮
-            </h1>
-            <p className="text-xl text-primary/80 font-medium">
-              以东方草本入茶，把药食同源做成年轻人愿意喝的日常健康饮品。
-            </p>
-            <p className="text-muted-foreground leading-relaxed max-w-lg">
-              山宁专注于将中药草本、四季养生与现代茶饮结合，面向澳门年轻消费群体，打造兼具健康属性、文化属性与社交传播力的新式中药茶饮品牌。
-            </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 rounded-full px-8 text-lg">
+            <div className="space-y-4">
+              <h1 className="text-6xl md:text-8xl font-headline font-bold text-primary leading-tight">
+                山宁｜让东方草本<br />成为日常
+              </h1>
+              <p className="text-xl text-primary/80 font-medium max-w-lg leading-relaxed">
+                以四季草本、现代茶饮与东方植物美学，重新定义年轻人的轻养生饮品体验。
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-5 pt-4">
+              <Button 
+                size="lg" 
+                onClick={scrollToProducts}
+                className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 h-14 text-lg shadow-xl shadow-primary/20"
+              >
                 探索产品
               </Button>
-              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5 rounded-full px-8 text-lg">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                onClick={scrollToBrand}
+                className="border-primary text-primary hover:bg-primary/5 rounded-full px-10 h-14 text-lg"
+              >
                 了解品牌
               </Button>
             </div>
+            <div className="flex items-center gap-8 pt-8 border-t border-primary/5">
+              <div>
+                <p className="text-2xl font-headline font-bold text-primary">0 添加</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">草本成分</p>
+              </div>
+              <div className="w-px h-8 bg-primary/10"></div>
+              <div>
+                <p className="text-2xl font-headline font-bold text-primary">100%</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">药食同源</p>
+              </div>
+              <div className="w-px h-8 bg-primary/10"></div>
+              <div>
+                <p className="text-2xl font-headline font-bold text-primary">四季</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">精准调理</p>
+              </div>
+            </div>
           </div>
           <div className="relative group lg:block hidden">
-            <div className="absolute -inset-4 bg-secondary/20 rounded-full blur-3xl group-hover:bg-secondary/30 transition-all duration-700"></div>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 aspect-[4/5] md:aspect-square bg-muted">
+            <div className="absolute -inset-10 bg-secondary/15 rounded-full blur-3xl animate-pulse"></div>
+            <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] bg-muted">
               {heroImg && (
                 <Image 
                   src={heroImg.imageUrl} 
                   alt="山宁茶饮" 
                   fill 
                   priority
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   data-ai-hint={heroImg.imageHint}
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
-              <div className="absolute bottom-8 left-8 text-white">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-secondary rounded-full"></div>
-                  <span className="text-sm font-bold tracking-widest uppercase">匠心调配</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
+              <div className="absolute bottom-12 left-12 text-white">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-2.5 h-2.5 bg-secondary rounded-full"></div>
+                  <span className="text-sm font-bold tracking-[0.3em] uppercase">匠心调配</span>
                 </div>
-                <p className="font-headline text-3xl">自然之味，愈见初心</p>
+                <p className="font-headline text-4xl mb-2">自然之味，愈见初心</p>
+                <p className="text-white/60 text-sm max-w-xs">每一口都是对山川草木的致敬，对身心平衡的守候。</p>
               </div>
             </div>
           </div>
@@ -86,42 +134,45 @@ export default function Home() {
       </section>
 
       {/* 2. Brand Concept */}
-      <section id="concept" className="py-24 bg-primary/5">
+      <section id="brand" className="py-24 bg-primary/5">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h2 className="text-4xl font-headline font-bold text-primary">让中药茶饮变得年轻、好喝、日常</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              传统中药饮品常被认为口味苦涩、形象老旧。山宁希望通过新式茶饮形式，把药食同源理念融入日常生活，让消费者在喝茶饮的同时获得更轻松的养生体验。
+          <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
+            <Badge className="bg-secondary px-4 py-1 text-xs tracking-widest uppercase">Our Vision</Badge>
+            <h2 className="text-5xl font-headline font-bold text-primary">让中药茶饮变得年轻、好喝、日常</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              山宁希望通过新式茶饮形式，把药食同源理念融入日常生活。我们不谈“苦涩”与“疗效”，只谈“风味”与“养护”。让消费者在享受美味的同时，获得更轻松的平衡体验。
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-10">
             {[
               { 
-                icon: <Leaf className="w-8 h-8 text-primary" />, 
+                icon: <Leaf className="w-10 h-10 text-primary" />, 
                 title: "草本入饮", 
-                desc: "精选药食同源草本原料，严格质控，保留天然活性成分。" 
+                desc: "精选药食同源草本原料，保留天然植物活性。通过现代冷泡与萃取工艺，释放自然草本之美。" 
               },
               { 
-                icon: <Wind className="w-8 h-8 text-primary" />, 
+                icon: <Wind className="w-10 h-10 text-primary" />, 
                 title: "四季调养", 
-                desc: "顺应天时，根据春夏秋冬设计不同饮品，平衡身体需求。" 
+                desc: "顺应二十四节气，根据气候变化设计差异化饮品。在春生、夏长、秋收、冬藏中平衡身体需求。" 
               },
               { 
-                icon: <Users className="w-8 h-8 text-primary" />, 
+                icon: <Users className="w-10 h-10 text-primary" />, 
                 title: "年轻表达", 
-                desc: "用现代茶饮方式重塑中药饮品形象，打造社交新场景。" 
+                desc: "用现代视觉语言重塑东方养生。打造高颜值、社交媒体友好且富有文化深度的品牌体验。" 
               }
             ].map((card, i) => (
-              <Card key={i} className="border-none shadow-sm hover:shadow-md transition-all group">
-                <CardHeader className="space-y-4">
-                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                    {card.icon}
+              <Card key={i} className="border-none shadow-sm hover:shadow-2xl transition-all duration-500 group rounded-[2.5rem] bg-white">
+                <CardHeader className="p-10 pb-4 space-y-6">
+                  <div className="w-20 h-20 bg-primary/5 rounded-3xl flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-primary transition-all duration-500">
+                    <div className="group-hover:text-white transition-colors">
+                      {card.icon}
+                    </div>
                   </div>
-                  <CardTitle className="text-xl font-headline">{card.title}</CardTitle>
+                  <CardTitle className="text-2xl font-headline font-bold text-primary">{card.title}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
+                <CardContent className="px-10 pb-10">
+                  <p className="text-muted-foreground leading-relaxed">{card.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -129,27 +180,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Interactive Section */}
-      <section className="py-12 bg-white/20">
-        <TeaRecommendation />
-      </section>
-
-      {/* 3. Product Highlights (Differentials) */}
-      <section className="py-24 bg-white">
+      {/* 3. Product Highlights */}
+      <section id="products" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-headline font-bold text-primary text-center mb-16">山宁的四个核心差异化</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+            <div className="space-y-4">
+              <Badge variant="outline" className="border-primary/20 text-primary font-bold">CORE VALUES</Badge>
+              <h2 className="text-5xl font-headline font-bold text-primary">山宁的核心竞争力</h2>
+            </div>
+            <p className="text-muted-foreground max-w-md text-sm leading-relaxed">
+              在同质化严重的茶饮市场中，山宁凭借精准的品类切入与深厚的文化底蕴，构建起难以逾越的品牌壁垒。
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { icon: <Target className="w-6 h-6" />, title: "稀缺性", desc: "澳门市场中，中草药健康茶饮仍处于相对空白阶段，具有先行者优势。" },
-              { icon: <Heart className="w-6 h-6" />, title: "养生需求", desc: "精准切入当代年轻人关注健康、轻负担、自然调理的需求。" },
-              { icon: <ShieldCheck className="w-6 h-6" />, title: "0 添加", desc: "强调自然、低负担、少添加的产品理念，建立深厚品牌信任感。" },
-              { icon: <Palette className="w-6 h-6" />, title: "文化属性", desc: "结合东方美学与现代设计，让传统养生更具记忆点与传播力。" }
+              { icon: <Target className="w-7 h-7" />, title: "品类稀缺性", desc: "澳门市场中，具备文化属性与轻养生功能的茶饮仍处于蓝海阶段。" },
+              { icon: <Heart className="w-7 h-7" />, title: "精准养护", desc: "切入当代年轻人关注的“早C晚A”、低负担、日常自然调理需求。" },
+              { icon: <ShieldCheck className="w-7 h-7" />, title: "纯净配方", desc: "坚持自然、低糖、0 添加化学成分的原则，建立深度品牌信任。" },
+              { icon: <Palette className="w-7 h-7" />, title: "东方美学", desc: "结合传统纹理与现代极简，让每一杯茶饮都成为行走的文化社交名片。" }
             ].map((item, i) => (
-              <div key={i} className="p-8 border rounded-2xl hover:border-primary/20 transition-all hover:bg-primary/[0.02]">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6">
+              <div key={i} className="group p-10 border border-primary/5 rounded-[2rem] hover:border-secondary/20 transition-all duration-500 hover:bg-secondary/[0.02]">
+                <div className="w-16 h-16 bg-primary/5 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:bg-secondary group-hover:text-white transition-all">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-bold mb-3">{item.title}</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             ))}
@@ -157,72 +211,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* AI Interactive Section */}
+      <TeaRecommendation />
+
       {/* 4. Seasonal Menu */}
-      <section id="products" className="py-24 bg-primary/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl font-headline font-bold text-primary">四季系列菜单</h2>
-            <p className="text-muted-foreground">基于药食同源理念，为每一个季节定制的草本茶饮</p>
-          </div>
-
-          <Tabs defaultValue="spring" className="w-full">
-            <TabsList className="grid grid-cols-4 w-full max-w-2xl mx-auto mb-12 bg-white shadow-sm border h-14 p-1">
-              <TabsTrigger value="spring" className="data-[state=active]:bg-primary data-[state=active]:text-white h-full">春｜舒养</TabsTrigger>
-              <TabsTrigger value="summer" className="data-[state=active]:bg-primary data-[state=active]:text-white h-full">夏｜清爽</TabsTrigger>
-              <TabsTrigger value="autumn" className="data-[state=active]:bg-primary data-[state=active]:text-white h-full">秋｜润燥</TabsTrigger>
-              <TabsTrigger value="winter" className="data-[state=active]:bg-primary data-[state=active]:text-white h-full">冬｜温补</TabsTrigger>
-            </TabsList>
-
-            <SeasonalContent 
-              season="spring" 
-              title="舒养花茶系列" 
-              items={[
-                { name: "桂花乌龙草本茶", desc: "清新花香与浓郁茶感结合，舒缓压力", ingredients: "桂花, 乌龙", scene: "办公间歇、心情烦躁时" },
-                { name: "菊花雪梨清润茶", desc: "甘甜润喉，清热降火", ingredients: "菊花, 雪梨", scene: "长时间熬夜、用嗓过度" },
-                { name: "茉莉陈皮轻养茶", desc: "温润理气，茉莉清馨", ingredients: "茉莉, 陈皮", scene: "饭后消化、轻盈生活" }
-              ]}
-              imgId="spring-tea"
-            />
-            <SeasonalContent 
-              season="summer" 
-              title="清爽去腻系列" 
-              items={[
-                { name: "荷叶陈皮冷泡茶", desc: "冷泡工艺，极致解暑，去腻塑形", ingredients: "荷叶, 陈皮", scene: "盛夏午后、健身后" },
-                { name: "金银花青柠茶", desc: "清凉金银花与酸爽青柠，唤醒能量", ingredients: "金银花, 青柠", scene: "户外活动、午后困乏" },
-                { name: "乌梅山楂清爽饮", desc: "生津止渴，消积开胃", ingredients: "乌梅, 山楂", scene: "夏日聚餐、胃口不佳" }
-              ]}
-              imgId="summer-tea"
-            />
-            <SeasonalContent 
-              season="autumn" 
-              title="润燥养颜系列" 
-              items={[
-                { name: "桂花红枣枸杞茶", desc: "暖宫红润，桂香怡人", ingredients: "桂花, 红枣, 枸杞", scene: "气色暗淡、秋冬日常" },
-                { name: "雪梨百合润燥茶", desc: "细腻滋养，对抗秋燥", ingredients: "雪梨, 百合", scene: "干燥环境、久坐空调房" },
-                { name: "陈皮桂圆暖茶", desc: "温和补益，安神助眠", ingredients: "陈皮, 桂圆", scene: "入秋微凉、睡前舒缓" }
-              ]}
-              imgId="autumn-tea"
-            />
-            <SeasonalContent 
-              season="winter" 
-              title="温补暖身系列" 
-              items={[
-                { name: "红枣姜茶", desc: "驱寒暖胃，热力循环", ingredients: "红枣, 姜", scene: "冬季寒冷、体寒者" },
-                { name: "桂圆枸杞暖饮", desc: "能量充盈，暖手暖心", ingredients: "桂圆, 枸杞", scene: "手脚冰凉、体力消耗后" },
-                { name: "人参乌龙轻补茶", desc: "微补而不燥，提升元气", ingredients: "人参, 乌龙", scene: "冬日补气、学习工作时刻" }
-              ]}
-              imgId="winter-tea"
-            />
-          </Tabs>
-        </div>
-      </section>
+      <SeasonalMenu />
 
       {/* 5. Market Opportunity */}
       <section id="market" className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
           <div className="relative">
-            <div className="absolute -inset-10 bg-secondary/10 rounded-full blur-3xl"></div>
-            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-square">
+            <div className="absolute -inset-10 bg-secondary/10 rounded-full blur-[100px] animate-pulse"></div>
+            <div className="relative rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5]">
               {macauImg && (
                 <Image 
                   src={macauImg.imageUrl} 
@@ -234,23 +234,29 @@ export default function Home() {
               )}
             </div>
           </div>
-          <div className="space-y-8">
-            <h2 className="text-4xl font-headline font-bold text-primary">为什么是澳门，为什么是现在？</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              澳门饮品市场目前以传统奶茶、柠檬茶为主。随着消费升级，年轻群体对“颜值、文化、健康”的综合需求日益增长。中药健康茶饮在澳门处于蓝海阶段。
-            </p>
-            <div className="grid gap-4">
+          <div className="space-y-10">
+            <div className="space-y-4">
+              <Badge className="bg-primary/80">MARKET INSIGHT</Badge>
+              <h2 className="text-5xl font-headline font-bold text-primary">为什么是澳门？<br />为什么是现在？</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                澳门饮品市场正经历从传统奶茶向“高品质、重文化、轻负担”转型的关键时期。年轻群体对草本元素的天然认同感正逐渐转化为真实的消费力。
+              </p>
+            </div>
+            <div className="grid gap-6">
               {[
-                { title: "市场空白点", value: "85%", desc: "澳门年轻消费者对药食同源饮品有极高潜在兴趣" },
-                { title: "健康意识提升", value: "2x", desc: "近两年对低糖、自然成分饮品的搜索量翻倍" },
-                { title: "文化认同感", value: "High", desc: "草本元素在东方文化中具有无可替代的信任感" }
+                { title: "年轻化空间", desc: "澳门茶饮消费正从传统口味向健康、颜值、文化体验综合升级。" },
+                { title: "场景化需求", desc: "消费者不只购买饮品，也在购买情绪价值、生活方式和社交内容。" },
+                { title: "品牌差异机会", desc: "中药健康茶饮仍有较大的年轻化表达空间，具有明显的先行优势。" },
+                { title: "文化认同基础", desc: "东方草本与澳门本地生活方式有天然结合点，更易通过现代品牌语言产生共鸣。" }
               ].map((stat, i) => (
-                <div key={i} className="p-6 bg-primary/5 rounded-2xl flex items-center justify-between border border-transparent hover:border-primary/10 transition-colors">
-                  <div>
-                    <h4 className="font-bold text-primary">{stat.title}</h4>
-                    <p className="text-xs text-muted-foreground">{stat.desc}</p>
+                <div key={i} className="p-8 bg-primary/5 rounded-3xl flex gap-6 items-center border border-transparent hover:border-primary/10 transition-all group">
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-secondary shadow-sm group-hover:bg-secondary group-hover:text-white transition-all">
+                    <Zap className="w-6 h-6" />
                   </div>
-                  <span className="text-2xl font-headline font-bold text-secondary">{stat.value}</span>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-primary text-lg mb-1">{stat.title}</h4>
+                    <p className="text-sm text-muted-foreground">{stat.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -258,43 +264,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Competitive Analysis */}
-      <section className="py-24 bg-primary text-primary-foreground">
+      {/* 6. Brand Differentiation */}
+      <section id="advantage" className="py-24 bg-primary text-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl font-headline font-bold">不只是茶饮，而是草本健康生活方式</h2>
-            <p className="text-primary-foreground/70">多维度对比，见证山宁的独特优势</p>
+          <div className="text-center mb-20 space-y-6">
+            <h2 className="text-5xl font-headline font-bold">不只是茶饮，而是草本生活方式</h2>
+            <p className="text-primary-foreground/60 text-lg">多维度对比，见证山宁如何定义新标准</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-0 border border-white/20 rounded-3xl overflow-hidden shadow-2xl">
-            <div className="bg-white/5 p-10 border-r border-white/10 space-y-6">
-              <h3 className="text-2xl font-headline font-bold opacity-60">普通奶茶</h3>
-              <ul className="space-y-4 text-sm opacity-60">
-                <li className="flex items-center gap-2"><XIcon className="w-4 h-4 text-red-400" /> 糖分与油脂超标</li>
-                <li className="flex items-center gap-2"><XIcon className="w-4 h-4 text-red-400" /> 健康负担较重</li>
-                <li className="flex items-center gap-2"><XIcon className="w-4 h-4 text-red-400" /> 严重同质化竞争</li>
+          <div className="grid md:grid-cols-3 gap-0 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
+            <div className="bg-white/5 p-12 border-r border-white/10 space-y-8">
+              <h3 className="text-2xl font-headline font-bold opacity-40">普通奶茶</h3>
+              <ul className="space-y-5 text-sm opacity-40">
+                <li className="flex items-center gap-3 italic">高糖分与高油脂负担</li>
+                <li className="flex items-center gap-3 italic">健康属性匮乏</li>
+                <li className="flex items-center gap-3 italic">陷入同质化价格战</li>
               </ul>
             </div>
-            <div className="bg-white/10 p-10 border-r border-white/10 space-y-6">
-              <h3 className="text-2xl font-headline font-bold opacity-80">柠檬茶</h3>
-              <ul className="space-y-4 text-sm opacity-80">
-                <li className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-green-400" /> 清爽且解腻</li>
-                <li className="flex items-center gap-2"><XIcon className="w-4 h-4 text-red-400" /> 养生属性单一</li>
-                <li className="flex items-center gap-2"><XIcon className="w-4 h-4 text-red-400" /> 文化深度较浅</li>
+            <div className="bg-white/10 p-12 border-r border-white/10 space-y-8">
+              <h3 className="text-2xl font-headline font-bold opacity-60">柠檬茶</h3>
+              <ul className="space-y-5 text-sm opacity-60">
+                <li className="flex items-center gap-3">口感清爽且解腻</li>
+                <li className="flex items-center gap-3">养生维度较为单一</li>
+                <li className="flex items-center gap-3">社交场景传播力较弱</li>
               </ul>
             </div>
-            <div className="bg-secondary p-10 space-y-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4">
-                <Award className="w-12 h-12 text-white/20 rotate-12" />
+            <div className="bg-secondary p-12 space-y-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-6">
+                <Award className="w-16 h-16 text-white/10 rotate-12" />
               </div>
               <h3 className="text-2xl font-headline font-bold text-white">山宁 SHANNING</h3>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-white" /> 草本入茶，0 添加</li>
-                <li className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-white" /> 四季养生，精准对症</li>
-                <li className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-white" /> 现代东方美学文化</li>
-                <li className="flex items-center gap-2"><CheckIcon className="w-4 h-4 text-white" /> 极强品牌差异化</li>
+              <ul className="space-y-5 text-sm font-medium">
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-white" /> 东方草本风味，0 添加</li>
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-white" /> 四季养生，精准平衡</li>
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-white" /> 现代东方美学空间</li>
+                <li className="flex items-center gap-3"><Check className="w-4 h-4 text-white" /> 极强的社交媒体话题感</li>
               </ul>
-              <Button className="w-full bg-white text-secondary hover:bg-white/90 font-bold mt-4">
+              <Button 
+                onClick={() => scrollToContact('加盟咨询')}
+                className="w-full bg-white text-secondary hover:bg-white/90 font-bold h-14 rounded-2xl text-lg mt-4"
+              >
                 立即加盟
               </Button>
             </div>
@@ -302,101 +311,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Operations & Marketing */}
+      {/* 7. Operations Strategy */}
       <section id="strategy" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 space-y-24">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <Badge className="bg-secondary">线上运营</Badge>
-              <h3 className="text-3xl font-headline font-bold text-primary">打造社交媒体内容矩阵</h3>
-              <ul className="space-y-4 text-muted-foreground leading-relaxed">
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-1.5 h-1.5 bg-secondary rounded-full shrink-0"></div>
-                  <span>小红书、Instagram 深度种草，发布高颜值产品视觉。</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-1.5 h-1.5 bg-secondary rounded-full shrink-0"></div>
-                  <span>打造“年轻人第一杯中药茶饮”传播话题。</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-1.5 h-1.5 bg-secondary rounded-full shrink-0"></div>
-                  <span>联合澳门本地 KOC 进行真实探店测评。</span>
-                </li>
-              </ul>
-            </div>
-            <div className="bg-primary/5 rounded-3xl p-8 border grid grid-cols-2 gap-4">
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-primary/5 aspect-square flex flex-col items-center justify-center text-center space-y-2">
-                <Users className="w-8 h-8 text-primary" />
-                <span className="text-xs font-bold">KOL 联名</span>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-20 items-center">
+            <div className="space-y-10">
+              <div className="space-y-4">
+                <Badge className="bg-secondary">STRATEGY</Badge>
+                <h3 className="text-4xl font-headline font-bold text-primary">打造社交媒体驱动的内容矩阵</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  我们不只是卖茶，更是在运营一个关于“东方草本生活方式”的内容 IP。通过多维度的内容触达，让品牌进入消费者的心智。
+                </p>
               </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-primary/5 aspect-square flex flex-col items-center justify-center text-center space-y-2">
-                <LineChart className="w-8 h-8 text-primary" />
-                <span className="text-xs font-bold">流量追踪</span>
-              </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-primary/5 aspect-square flex flex-col items-center justify-center text-center space-y-2">
-                <TrendingUp className="w-8 h-8 text-primary" />
-                <span className="text-xs font-bold">话题热度</span>
-              </div>
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-primary/5 aspect-square flex flex-col items-center justify-center text-center space-y-2">
-                <Heart className="w-8 h-8 text-primary" />
-                <span className="text-xs font-bold">用户忠诚</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="order-2 md:order-1 relative">
-              <div className="bg-secondary/10 rounded-3xl p-12 aspect-[4/3] flex items-center justify-center">
-                <div className="space-y-4 text-center">
-                  <div className="flex justify-center gap-2">
-                    <MapPin className="w-10 h-10 text-secondary" />
+              <div className="space-y-6">
+                {[
+                  { title: "内容矩阵", desc: "小红书、Instagram 深度种草，发布具有东方美学韵味的高颜值产品视觉。" },
+                  { title: "KOL 联名", desc: "联合澳门本地具有影响力的 KOC 进行真实测评，打造“年轻人第一杯中药茶饮”话题。" },
+                  { title: "空间社交", desc: "通过极具氛围感的门店装修与季节限定礼盒，激发用户自发拍照分享。" }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="mt-1.5 w-2 h-2 bg-secondary rounded-full shrink-0"></div>
+                    <div>
+                      <h4 className="font-bold text-primary mb-1">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    </div>
                   </div>
-                  <h4 className="font-headline text-2xl text-primary">沉浸式门店空间</h4>
-                  <p className="text-sm text-muted-foreground">木质元素、草本香气、禅意灯光</p>
-                </div>
+                ))}
               </div>
             </div>
-            <div className="space-y-6 order-1 md:order-2">
-              <Badge className="bg-secondary">线下体验</Badge>
-              <h3 className="text-3xl font-headline font-bold text-primary">打造有氛围感的慢生活空间</h3>
-              <ul className="space-y-4 text-muted-foreground leading-relaxed">
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-1.5 h-1.5 bg-secondary rounded-full shrink-0"></div>
-                  <span>东方植物美学设计，打造高辨识度打卡空间。</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-1.5 h-1.5 bg-secondary rounded-full shrink-0"></div>
-                  <span>季节限定饮品发售，提升顾客到店频次。</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1.5 w-1.5 h-1.5 bg-secondary rounded-full shrink-0"></div>
-                  <span>跨界文创联名，进入年轻人核心生活圈。</span>
-                </li>
-              </ul>
+            <div className="bg-primary/5 rounded-[3rem] p-12 border grid grid-cols-2 gap-6 relative">
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-secondary/10 rounded-full blur-2xl"></div>
+              {[
+                { icon: <Users className="w-10 h-10 text-primary" />, label: "达人联名" },
+                { icon: <TrendingUp className="w-10 h-10 text-primary" />, label: "流量追踪" },
+                { icon: <Zap className="w-10 h-10 text-primary" />, label: "话题热度" },
+                { icon: <Heart className="w-10 h-10 text-primary" />, label: "用户忠诚" }
+              ].map((item, i) => (
+                <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-primary/5 flex flex-col items-center justify-center text-center space-y-4 hover:shadow-xl transition-all hover:-translate-y-1 group">
+                  <div className="group-hover:scale-110 transition-transform">{item.icon}</div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-primary/60">{item.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* 8. Store Locations */}
-      <section className="py-24 bg-primary/5">
+      <section id="location" className="py-24 bg-primary/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 space-y-4">
             <h2 className="text-4xl font-headline font-bold text-primary">理想门店选址</h2>
-            <p className="text-muted-foreground">精准切入人流与生活场景，构建品牌接触点</p>
+            <p className="text-muted-foreground">精准切入高净值人流与生活场景，构建多维品牌接触点。</p>
           </div>
-          <div className="grid md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { name: "核心商业区", desc: "商务人群、白领" },
-              { name: "高校周边", desc: "追求潮流的学生" },
-              { name: "文创街区", desc: "精致生活追求者" },
-              { name: "旅游景区", desc: "社交打卡与游客" },
-              { name: "写字楼附近", desc: "下午茶刚需人群" }
+              { name: "核心商业区", crowd: "职场白领、购物人群", advice: "适合开设品牌旗舰店，强化视觉传达。" },
+              { name: "高校周边", crowd: "Z世代学生、年轻教师", advice: "侧重社交互动与外带便利，打造打卡点。" },
+              { name: "文创街区", crowd: "精致生活追求者、游客", advice: "结合美学工坊概念，提供深度沉浸体验。" },
+              { name: "旅游景区", crowd: "外地游客、文化寻根者", advice: "适合伴手礼化产品，推广澳门草本名片。" },
+              { name: "写字楼附近", crowd: "商务茶歇、外卖刚需", advice: "主打高效快取，建立稳定的日常订购习惯。" }
             ].map((loc, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl border text-center hover:bg-primary hover:text-white transition-all group cursor-default">
-                <MapPin className="w-6 h-6 mx-auto mb-3 text-secondary group-hover:text-white" />
-                <h4 className="font-bold text-sm mb-1">{loc.name}</h4>
-                <p className="text-[10px] opacity-60 uppercase tracking-widest">{loc.desc}</p>
+              <div key={i} className="bg-white p-8 rounded-[2rem] border border-primary/5 text-center hover:bg-primary hover:text-white transition-all duration-500 group cursor-default shadow-sm hover:shadow-2xl">
+                <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-white/20 transition-all">
+                  <Sparkles className="w-6 h-6 text-secondary group-hover:text-white" />
+                </div>
+                <h4 className="font-bold text-lg mb-2">{loc.name}</h4>
+                <p className="text-[10px] text-secondary font-bold uppercase tracking-widest mb-4 group-hover:text-white/60">{loc.crowd}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed group-hover:text-white/80">{loc.advice}</p>
               </div>
             ))}
           </div>
@@ -407,141 +389,40 @@ export default function Home() {
       <section className="py-24 relative overflow-hidden bg-primary">
         <div className="absolute inset-0 bg-texture opacity-10"></div>
         <div className="max-w-4xl mx-auto px-6 text-center space-y-12 relative z-10">
-          <h2 className="text-5xl md:text-6xl font-headline font-bold text-white">
-            山宁，让东方草本<br />成为年轻人的日常茶饮
+          <h2 className="text-5xl md:text-7xl font-headline font-bold text-white leading-tight">
+            山宁，让东方草本<br />重新定义健康茶饮
           </h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            从药食同源到四季茶饮, 从健康需求到社交传播, 山宁希望用更年轻的方式重新定义中药健康茶饮。
+          <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
+            从药食同源到四季茶饮，从健康需求到社交传播。加入我们，开启一段自然与身心平衡的创业之旅。
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-12 h-14 text-lg">
-              查看完整菜单
+            <Button 
+              size="lg" 
+              onClick={() => scrollToContact('加盟咨询')}
+              className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-12 h-16 text-xl shadow-2xl shadow-secondary/20 transition-all active:scale-95"
+            >
+              立即咨询加盟
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 rounded-full px-12 h-14 text-lg">
-              联系我们
+            <Button 
+              size="lg" 
+              variant="outline" 
+              onClick={() => {
+                const el = document.getElementById('menu');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="border-white text-white hover:bg-white/10 rounded-full px-12 h-16 text-xl"
+            >
+              查看品牌手册
             </Button>
           </div>
         </div>
       </section>
 
-      {/* 10. Footer */}
-      <footer id="contact" className="py-12 bg-background border-t">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-white font-headline text-xs">山</div>
-                <span className="font-headline font-bold text-xl text-primary">山宁 SHANNING</span>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                专注于新式中药健康茶饮品牌，将药食同源理念融入现代生活方式。
-              </p>
-            </div>
-            <div>
-              <h5 className="font-bold text-sm mb-4">关于我们</h5>
-              <ul className="space-y-2 text-xs text-muted-foreground">
-                <li><Link href="#home">品牌故事</Link></li>
-                <li><Link href="#concept">研发理念</Link></li>
-                <li><Link href="#strategy">加入我们</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-bold text-sm mb-4">联系方式</h5>
-              <ul className="space-y-2 text-xs text-muted-foreground">
-                <li>邮箱: hello@shanning.com</li>
-                <li>地点: 澳门特别行政区</li>
-                <li>合作: partnership@shanning.com</li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-bold text-sm mb-4">社交平台</h5>
-              <div className="flex gap-4">
-                <span className="text-xs text-muted-foreground hover:text-primary cursor-pointer">Instagram</span>
-                <span className="text-xs text-muted-foreground hover:text-primary cursor-pointer">小红书</span>
-                <span className="text-xs text-muted-foreground hover:text-primary cursor-pointer">TikTok</span>
-              </div>
-            </div>
-          </div>
-          <div className="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-muted-foreground uppercase tracking-widest">
-            <span>© 2024 SHANNING TEA. ALL RIGHTS RESERVED.</span>
-            <span>澳门｜药食同源｜四季养生</span>
-          </div>
-        </div>
-      </footer>
+      {/* 10. Contact Form Section */}
+      <ContactSection />
+
+      {/* 11. Footer */}
+      <Footer />
     </main>
-  );
-}
-
-function SeasonalContent({ season, title, items, imgId }: { season: string, title: string, items: any[], imgId: string }) {
-  const image = PlaceHolderImages.find(img => img.id === imgId);
-  return (
-    <TabsContent value={season} className="animate-in fade-in slide-in-from-bottom-4 duration-500 mt-0">
-      <div className="grid lg:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-[2rem] shadow-sm border">
-        <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-muted">
-          {image && (
-            <Image 
-              src={image.imageUrl} 
-              alt={title} 
-              fill 
-              className="object-cover"
-              data-ai-hint={image.imageHint}
-            />
-          )}
-        </div>
-        <div className="space-y-8">
-          <div className="space-y-2">
-            <h3 className="text-3xl font-headline font-bold text-primary">{title}</h3>
-            <p className="text-sm text-secondary font-bold tracking-widest uppercase">Seasonal Series</p>
-          </div>
-          <div className="space-y-6">
-            {items.map((item, idx) => (
-              <div key={idx} className="group cursor-default border-b border-primary/5 pb-4 last:border-0">
-                <div className="flex justify-between items-baseline mb-1">
-                  <h4 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors">{item.name}</h4>
-                  <Badge variant="secondary" className="bg-secondary/10 text-secondary text-[10px]">{item.ingredients}</Badge>
-                </div>
-                <p className="text-xs text-muted-foreground mb-2">{item.desc}</p>
-                <div className="flex items-center gap-1.5 text-[10px] font-bold text-primary/40 group-hover:text-primary/60">
-                  <Heart className="w-3 h-3" />
-                  <span>适用场景: {item.scene}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <Button variant="link" className="text-primary font-bold p-0 flex items-center gap-2 group/btn">
-            获取完整季节配方表 <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-          </Button>
-        </div>
-      </div>
-    </TabsContent>
-  );
-}
-
-function SparklesIcon(props: any) {
-  return (
-    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-      <path d="M5 3v4" />
-      <path d="M19 17v4" />
-      <path d="M3 5h4" />
-      <path d="M17 19h4" />
-    </svg>
-  );
-}
-
-function CheckIcon(props: any) {
-  return (
-    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
-
-function XIcon(props: any) {
-  return (
-    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
   );
 }

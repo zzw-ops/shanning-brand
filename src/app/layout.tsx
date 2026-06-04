@@ -1,11 +1,16 @@
 
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: '山宁 Shanning | 东方茶饮新美学',
-  description: '山宁专注于将中药草本、四季养生与现代茶饮结合，打造兼具健康属性、文化属性与社交传播力的新式中药茶饮品牌。',
+  title: '山宁 SHANNING｜新式中药健康茶饮品牌',
+  description: '山宁 SHANNING 专注于将东方草本、四季养生理念与现代茶饮体验结合，面向澳门及年轻消费群体，打造兼具日常性、文化感与社交传播力的新式草本茶饮品牌。',
+  openGraph: {
+    title: '山宁 SHANNING｜新式中药健康茶饮品牌',
+    description: '以四季草本、现代茶饮与东方植物美学，重新定义年轻人的轻养生饮品体验。',
+    images: ['https://picsum.photos/seed/shanning-og/1200/630'],
+  },
 };
 
 export default function RootLayout({

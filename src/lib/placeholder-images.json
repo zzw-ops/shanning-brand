@@ -1,40 +1,46 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-tea",
-      "description": "Premium Chinese herbal tea with steam and medicinal herbs in a zen setting",
-      "imageUrl": "https://picsum.photos/seed/shanning-craft/800/1000",
-      "imageHint": "herbal tea"
+      "id": "hero-main",
+      "description": "Premium oriental herbal tea experience",
+      "imageUrl": "https://picsum.photos/seed/shanning-hero-v2/1200/800",
+      "imageHint": "herbal tea zen"
     },
     {
-      "id": "spring-tea",
-      "description": "Soothing flower tea with jasmine and tangerine peel",
-      "imageUrl": "https://picsum.photos/seed/spring/600/400",
-      "imageHint": "flower tea"
+      "id": "spring-visual",
+      "description": "Fresh floral tea for spring",
+      "imageUrl": "https://picsum.photos/seed/shanning-spring/800/600",
+      "imageHint": "floral tea"
     },
     {
-      "id": "summer-tea",
-      "description": "Refreshing cold brew herbal tea with lotus leaf",
-      "imageUrl": "https://picsum.photos/seed/summer/600/400",
-      "imageHint": "cold tea"
+      "id": "summer-visual",
+      "description": "Cooling herbal tea for summer",
+      "imageUrl": "https://picsum.photos/seed/shanning-summer/800/600",
+      "imageHint": "cold brew tea"
     },
     {
-      "id": "autumn-tea",
-      "description": "Moistening tea with red dates and goji berries",
-      "imageUrl": "https://picsum.photos/seed/autumn/600/400",
-      "imageHint": "goji tea"
+      "id": "autumn-visual",
+      "description": "Moisturizing tea for autumn",
+      "imageUrl": "https://picsum.photos/seed/shanning-autumn/800/600",
+      "imageHint": "goji red date tea"
     },
     {
-      "id": "winter-tea",
-      "description": "Warming ginger and ginseng tea",
-      "imageUrl": "https://picsum.photos/seed/winter/600/400",
-      "imageHint": "ginger tea"
+      "id": "winter-visual",
+      "description": "Warming tonic tea for winter",
+      "imageUrl": "https://picsum.photos/seed/shanning-winter/800/600",
+      "imageHint": "ginseng ginger tea"
     },
     {
-      "id": "macau-street",
-      "description": "Traditional Macau street with modern aesthetic vibe",
-      "imageUrl": "https://picsum.photos/seed/macau/800/600",
-      "imageHint": "Macau street"
+      "id": "macau-lifestyle",
+      "description": "Modern Macau lifestyle aesthetic",
+      "imageUrl": "https://picsum.photos/seed/shanning-macau/800/600",
+      "imageHint": "Macau street aesthetic"
+    },
+    {
+      "id": "brand-texture-light",
+      "description": "Subtle oriental paper texture",
+      "imageUrl": "https://picsum.photos/seed/shanning-texture/1920/1080",
+      "imageHint": "paper texture"
     }
   ]
 }
