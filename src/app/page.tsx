@@ -117,8 +117,8 @@ export default function Home() {
       title: "社交媒体内容矩阵",
       icon: <MessageSquare className="w-10 h-10" />,
       target: "占领年轻消费者心智",
-      execution: "小红书、Instagram 深度种草，发布具有东方美学韵味的高颜值视觉。",
-      platform: "小红书、Instagram",
+      execution: "小红书、Instagram 深度种草，发布具有东方美学韵味的高颜值视觉，通过高频视觉触达建立品牌联想。",
+      platform: "小红书 / Instagram",
       result: "月均触达 10w+ 精准受众",
       assets: "专业摄影稿、博主探店视频"
     },
@@ -126,28 +126,28 @@ export default function Home() {
       title: "KOL 联名合作",
       icon: <Users className="w-10 h-10" />,
       target: "提升品牌信任度与破圈",
-      execution: "联合澳门本地具有影响力的 KOC 进行真实测评，打造“年轻人的第一杯中药茶”。",
-      platform: "Facebook、本地社群",
-      result: "实现品牌声量阶梯式增长",
+      execution: "联合澳门本地及大湾区具有影响力的 KOC 进行真实测评，打造“年轻人的第一杯中药茶饮”热门话题。",
+      platform: "Facebook / 小红书 / 社群",
+      result: "声量阶梯式增长 200%",
       assets: "联名杯套、专属优惠码"
     },
     {
       title: "空间社交与打卡传播",
       icon: <Camera className="w-10 h-10" />,
       target: "引导用户自发性二次传播",
-      execution: "通过极具氛围感的门店装修与季节限定礼盒，配套精致周边激发分享欲望。",
+      execution: "通过极具视觉张力的门店美学装修与季节限定礼盒，配套精致周边激发用户分享欲望与社交货币感。",
       platform: "社交媒体全平台",
-      result: "UGC 产出率提升 40%+",
+      result: "UGC 产出率提升 45%+",
       assets: "艺术装置、限定插画"
     },
     {
       title: "用户反馈与闭环追踪",
       icon: <TrendingUp className="w-10 h-10" />,
       target: "建立长期复购与忠诚度",
-      execution: "建立会员积分体系，通过数字化工具收集偏好，精准推送季节新品。",
-      platform: "私域 (WeChat/WA)",
-      result: "复购率较传统茶饮提升 25%",
-      assets: "会员系统、营销看板"
+      execution: "建立数字化会员体系，通过消费行为分析精准推送季节新品，实现从流量到“留量”的品牌私域闭环。",
+      platform: "私域 (WeChat / WhatsApp)",
+      result: "复购率提升 30% 以上",
+      assets: "会员系统、数字化看板"
     }
   ];
 
@@ -447,7 +447,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20 space-y-6">
             <h2 className="text-5xl font-headline font-bold">不只是茶饮，而是草本生活方式</h2>
-            <p className="text-primary-foreground/60 text-lg">多维度对比，见证山宁如何 definition 新标准</p>
+            <p className="text-primary-foreground/60 text-lg">多维度对比，见证山宁如何定义新标准</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-0 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
@@ -495,7 +495,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Operations Strategy - CREATIVE INTERACTIVE VERSION */}
+      {/* 7. Operations Strategy */}
       <section id="strategy" className="py-24 bg-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
           <div className="absolute inset-0 bg-texture"></div>
@@ -543,8 +543,8 @@ export default function Home() {
                   onMouseLeave={() => setActiveStrategyId(null)}
                   onClick={() => setActiveStrategyId(activeStrategyId === i ? null : i)}
                   className={cn(
-                    "bg-white p-10 rounded-[2.5rem] shadow-sm border border-primary/5 flex flex-col items-center justify-center text-center space-y-6 transition-all duration-500 cursor-pointer relative overflow-hidden min-h-[280px]",
-                    activeStrategyId === i ? "ring-2 ring-secondary/50 shadow-2xl scale-[1.05] z-20" : "hover:shadow-md hover:-translate-y-1"
+                    "bg-white p-10 rounded-[2.5rem] shadow-sm border border-primary/5 flex flex-col items-center justify-center text-center space-y-6 transition-all duration-500 cursor-pointer relative overflow-hidden min-h-[350px]",
+                    activeStrategyId === i ? "ring-2 ring-secondary/50 shadow-2xl scale-[1.08] z-20" : "hover:shadow-md hover:-translate-y-1"
                   )}
                 >
                   <div className={cn(
@@ -555,39 +555,39 @@ export default function Home() {
                   </div>
                   <span className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80">{strategy.title}</span>
                   
-                  {/* Creative Detail Overlay */}
+                  {/* Enhanced Detail Overlay */}
                   <div className={cn(
-                    "absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/95 p-8 text-white text-left flex flex-col transition-all duration-700 ease-in-out",
+                    "absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/95 p-10 text-white text-left flex flex-col transition-all duration-700 ease-in-out",
                     activeStrategyId === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"
                   )}>
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center text-secondary border border-secondary/20">
-                        <ArrowUpRight className="w-5 h-5" />
+                    <div className="flex justify-between items-start mb-8">
+                      <div className="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center text-secondary border border-secondary/20">
+                        <ArrowUpRight className="w-6 h-6" />
                       </div>
-                      <span className="text-[10px] font-bold text-secondary uppercase tracking-widest bg-secondary/10 px-2 py-1 rounded-full border border-secondary/20">Strategy Detail</span>
+                      <span className="text-[10px] font-bold text-secondary uppercase tracking-widest bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20">Strategy Detail</span>
                     </div>
                     
-                    <h5 className="font-headline font-bold text-2xl text-secondary mb-4 leading-tight">{strategy.title}</h5>
+                    <h5 className="font-headline font-bold text-3xl text-secondary mb-6 leading-tight">{strategy.title}</h5>
                     
-                    <div className="space-y-5 flex-grow">
-                      <div>
-                        <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">执行计划 / 平台</p>
-                        <p className="text-sm leading-relaxed text-white/90">{strategy.execution}</p>
+                    <div className="space-y-6 flex-grow">
+                      <div className="space-y-2">
+                        <p className="text-xs font-bold text-white/40 uppercase tracking-widest">执行计划 / 核心目标</p>
+                        <p className="text-base leading-relaxed text-white/90">{strategy.execution}</p>
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">预期成果</p>
-                          <p className="text-xs text-secondary font-bold">{strategy.result}</p>
+                      <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">
+                        <div className="space-y-1">
+                          <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">预期成果</p>
+                          <p className="text-sm text-secondary font-bold">{strategy.result}</p>
                         </div>
-                        <div>
-                          <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">关键素材</p>
-                          <p className="text-xs text-white/80">{strategy.assets}</p>
+                        <div className="space-y-1">
+                          <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">执行平台</p>
+                          <p className="text-sm text-white/80">{strategy.platform}</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
-                      <span className="text-[11px] font-bold text-secondary/80 uppercase tracking-tighter">{strategy.platform}</span>
+                    <div className="pt-6 mt-4 border-t border-white/5 flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-secondary/80 uppercase tracking-tighter">Powered by Shanning Marketing</span>
                       <Sparkles className="w-4 h-4 text-secondary animate-pulse" />
                     </div>
                   </div>
@@ -653,7 +653,7 @@ export default function Home() {
                     
                     <div className={cn(
                       "overflow-hidden transition-all duration-500 space-y-4",
-                      isActive ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0"
+                      isActive ? "max-h-[600px] opacity-100 mt-2" : "max-h-0 opacity-0"
                     )}>
                       <div className="space-y-1">
                         <span className="text-[10px] font-bold text-primary/40 uppercase block">人群特点</span>
