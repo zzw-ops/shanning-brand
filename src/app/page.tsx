@@ -61,21 +61,24 @@ export default function Home() {
           </div>
           <div className="relative group lg:block hidden">
             <div className="absolute -inset-4 bg-secondary/20 rounded-full blur-3xl group-hover:bg-secondary/30 transition-all duration-700"></div>
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 aspect-[4/5] md:aspect-square">
-              <Image 
-                src={heroImg?.imageUrl || ''} 
-                alt="山宁茶饮" 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                data-ai-hint={heroImg?.imageHint}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 aspect-[4/5] md:aspect-square bg-muted">
+              {heroImg && (
+                <Image 
+                  src={heroImg.imageUrl} 
+                  alt="山宁茶饮" 
+                  fill 
+                  priority
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  data-ai-hint={heroImg.imageHint}
+                />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-8 left-8 text-white">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-2 h-2 bg-secondary rounded-full"></div>
                   <span className="text-sm font-bold tracking-widest uppercase">匠心调配</span>
                 </div>
-                <p className="font-headline text-2xl">自然之味，愈见初心</p>
+                <p className="font-headline text-3xl">自然之味，愈见初心</p>
               </div>
             </div>
           </div>
@@ -220,13 +223,15 @@ export default function Home() {
           <div className="relative">
             <div className="absolute -inset-10 bg-secondary/10 rounded-full blur-3xl"></div>
             <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-square">
-              <Image 
-                src={macauImg?.imageUrl || ''} 
-                alt="澳门市场" 
-                fill 
-                className="object-cover"
-                data-ai-hint={macauImg?.imageHint}
-              />
+              {macauImg && (
+                <Image 
+                  src={macauImg.imageUrl} 
+                  alt="澳门市场" 
+                  fill 
+                  className="object-cover"
+                  data-ai-hint={macauImg.imageHint}
+                />
+              )}
             </div>
           </div>
           <div className="space-y-8">
@@ -472,14 +477,16 @@ function SeasonalContent({ season, title, items, imgId }: { season: string, titl
   return (
     <TabsContent value={season} className="animate-in fade-in slide-in-from-bottom-4 duration-500 mt-0">
       <div className="grid lg:grid-cols-2 gap-12 items-center bg-white p-8 md:p-12 rounded-[2rem] shadow-sm border">
-        <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-          <Image 
-            src={image?.imageUrl || ''} 
-            alt={title} 
-            fill 
-            className="object-cover"
-            data-ai-hint={image?.imageHint}
-          />
+        <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-muted">
+          {image && (
+            <Image 
+              src={image.imageUrl} 
+              alt={title} 
+              fill 
+              className="object-cover"
+              data-ai-hint={image.imageHint}
+            />
+          )}
         </div>
         <div className="space-y-8">
           <div className="space-y-2">

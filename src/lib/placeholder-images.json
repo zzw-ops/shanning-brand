@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-tea",
+      "description": "Premium Chinese herbal tea with steam and medicinal herbs in a zen setting",
+      "imageUrl": "https://picsum.photos/seed/shanning-craft/800/1000",
+      "imageHint": "herbal tea"
+    },
+    {
+      "id": "spring-tea",
+      "description": "Soothing flower tea with jasmine and tangerine peel",
+      "imageUrl": "https://picsum.photos/seed/spring/600/400",
+      "imageHint": "flower tea"
+    },
+    {
+      "id": "summer-tea",
+      "description": "Refreshing cold brew herbal tea with lotus leaf",
+      "imageUrl": "https://picsum.photos/seed/summer/600/400",
+      "imageHint": "cold tea"
+    },
+    {
+      "id": "autumn-tea",
+      "description": "Moistening tea with red dates and goji berries",
+      "imageUrl": "https://picsum.photos/seed/autumn/600/400",
+      "imageHint": "goji tea"
+    },
+    {
+      "id": "winter-tea",
+      "description": "Warming ginger and ginseng tea",
+      "imageUrl": "https://picsum.photos/seed/winter/600/400",
+      "imageHint": "ginger tea"
+    },
+    {
+      "id": "macau-street",
+      "description": "Traditional Macau street with modern aesthetic vibe",
+      "imageUrl": "https://picsum.photos/seed/macau/800/600",
+      "imageHint": "Macau street"
+    }
+  ]
 }
