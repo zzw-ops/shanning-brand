@@ -3,86 +3,86 @@
     {
       "id": "hero-main",
       "description": "Premium oriental herbal tea experience with steam and wooden texture",
-      "imageUrl": "https://picsum.photos/seed/shanning-hero-v3/1200/800",
+      "imageUrl": "https://picsum.photos/seed/shanning-hero-v2/1200/800",
       "imageHint": "herbal tea zen"
     },
     {
       "id": "vision-herb",
       "description": "Close up of fresh herbal ingredients being sorted",
-      "imageUrl": "https://picsum.photos/seed/herb-vision/600/400",
-      "imageHint": "herbal ingredients"
+      "imageUrl": "https://picsum.photos/seed/shanning-herb/600/400",
+      "imageHint": "herbal medicine ingredients"
     },
     {
       "id": "vision-season",
       "description": "Landscape showing transitions of nature through seasons",
-      "imageUrl": "https://picsum.photos/seed/season-vision/600/400",
-      "imageHint": "nature landscape"
+      "imageUrl": "https://picsum.photos/seed/shanning-season/600/400",
+      "imageHint": "nature landscape seasons"
     },
     {
       "id": "vision-young",
-      "description": "Modern young person holding a designer tea cup",
-      "imageUrl": "https://picsum.photos/seed/young-vision/600/400",
-      "imageHint": "young lifestyle"
+      "description": "Modern young person holding a designer tea cup in a bright space",
+      "imageUrl": "https://picsum.photos/seed/shanning-young/600/400",
+      "imageHint": "modern tea lifestyle"
     },
     {
       "id": "spring-visual",
-      "description": "Fresh floral tea with blooming flowers",
-      "imageUrl": "https://picsum.photos/seed/spring-tea-v2/800/600",
-      "imageHint": "spring floral"
+      "description": "Fresh floral tea with blooming cherry blossoms or jasmine",
+      "imageUrl": "https://picsum.photos/seed/shanning-spring-v2/800/600",
+      "imageHint": "spring flower tea"
     },
     {
       "id": "summer-visual",
-      "description": "Icy cold brew herbal tea with condensation",
-      "imageUrl": "https://picsum.photos/seed/summer-tea-v2/800/600",
-      "imageHint": "cold brew"
+      "description": "Icy cold brew herbal tea with condensation on glass",
+      "imageUrl": "https://picsum.photos/seed/shanning-summer-v2/800/600",
+      "imageHint": "cold brew tea"
     },
     {
       "id": "autumn-visual",
-      "description": "Warm golden tea with red dates",
-      "imageUrl": "https://picsum.photos/seed/autumn-tea-v2/800/600",
-      "imageHint": "autumn tea"
+      "description": "Warm golden tea with red dates and warm afternoon sun",
+      "imageUrl": "https://picsum.photos/seed/shanning-autumn-v2/800/600",
+      "imageHint": "warm autumn tea"
     },
     {
       "id": "winter-visual",
-      "description": "Steaming ginger tea with cinnamon",
-      "imageUrl": "https://picsum.photos/seed/winter-tea-v2/800/600",
-      "imageHint": "hot ginger"
+      "description": "Steaming ginger tea with cinnamon and dark cozy background",
+      "imageUrl": "https://picsum.photos/seed/shanning-winter-v2/800/600",
+      "imageHint": "hot ginger tonic"
     },
     {
       "id": "macau-lifestyle",
-      "description": "Iconic Macau street architecture",
-      "imageUrl": "https://picsum.photos/seed/macau-street-v2/800/600",
-      "imageHint": "Macau city"
+      "description": "Iconic Macau street architecture mixed with modern design",
+      "imageUrl": "https://picsum.photos/seed/macau-st-paul/800/600",
+      "imageHint": "Macau street view"
     },
     {
       "id": "loc-commercial",
-      "description": "Modern shopping mall interior",
-      "imageUrl": "https://picsum.photos/seed/mall-scene/800/600",
-      "imageHint": "shopping mall"
+      "description": "Modern shopping mall interior with high-end aesthetic",
+      "imageUrl": "https://picsum.photos/seed/macau-mall/400/300",
+      "imageHint": "modern shopping mall"
     },
     {
       "id": "loc-university",
-      "description": "Energetic university students in campus setting",
-      "imageUrl": "https://picsum.photos/seed/university-life-v2/800/600",
-      "imageHint": "university students"
+      "description": "University campus plaza with students and green trees",
+      "imageUrl": "https://picsum.photos/seed/campus-life/400/300",
+      "imageHint": "university campus"
     },
     {
       "id": "loc-cultural",
-      "description": "Art gallery or cultural district street",
-      "imageUrl": "https://picsum.photos/seed/art-district/800/600",
+      "description": "Art gallery or cultural district street corner",
+      "imageUrl": "https://picsum.photos/seed/cultural-art/400/300",
       "imageHint": "cultural district"
     },
     {
       "id": "loc-tourist",
       "description": "Traditional architecture in Macau tourist area",
-      "imageUrl": "https://picsum.photos/seed/macau-heritage-v2/800/600",
-      "imageHint": "tourist site"
+      "imageUrl": "https://picsum.photos/seed/macau-heritage/400/300",
+      "imageHint": "Macau heritage site"
     },
     {
       "id": "loc-office",
-      "description": "Sophisticated modern office lobby",
-      "imageUrl": "https://picsum.photos/seed/office-business/800/600",
-      "imageHint": "office building"
+      "description": "Sophisticated modern office lobby or break area",
+      "imageUrl": "https://picsum.photos/seed/office-lobby/400/300",
+      "imageHint": "office building interior"
     }
   ]
 }
