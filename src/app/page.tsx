@@ -3,7 +3,6 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Navbar } from '@/components/brand/Navbar';
 import { TeaRecommendation } from '@/components/brand/TeaRecommendation';
 import { SeasonalMenu } from '@/components/brand/SeasonalMenu';
@@ -26,8 +25,6 @@ import {
   Zap,
   Check,
   MapPin,
-  ArrowRight,
-  Coffee,
   Info
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -52,7 +49,15 @@ export default function Home() {
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const offset = 80;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const locations = [
@@ -208,19 +213,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-10">
             {[
               { 
-                imgId: "loc-cultural",
+                imgId: "vision-herb",
                 icon: <Leaf className="w-10 h-10 text-primary" />, 
                 title: "草本入饮", 
                 desc: "精选药食同源草本原料，保留天然植物活性。通过现代冷泡与萃取工艺，释放自然草本之美。" 
               },
               { 
-                imgId: "winter-visual",
+                imgId: "vision-season",
                 icon: <Wind className="w-10 h-10 text-primary" />, 
                 title: "四季调养", 
                 desc: "顺应二十四节气，根据气候变化设计差异化饮品。在春生、夏长、秋收、冬藏中平衡身体需求。" 
               },
               { 
-                imgId: "macau-lifestyle",
+                imgId: "vision-young",
                 icon: <Users className="w-10 h-10 text-primary" />, 
                 title: "年轻表达", 
                 desc: "用现代视觉语言重塑东方养生。打造高颜值、社交媒体友好且富有文化深度的品牌体验。" 
