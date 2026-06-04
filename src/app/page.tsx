@@ -37,128 +37,80 @@ import {
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 
-// Strategy Card Component for better local state management
-function StrategyCard({ strategy, index, isActive, isAnyActive, onMouseEnter, onMouseLeave }: {
+// Optimized Strategy Card Component
+function StrategyCard({ strategy, index, isActive, onMouseEnter, onMouseLeave }: {
   strategy: any;
   index: number;
   isActive: boolean;
-  isAnyActive: boolean;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }) {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const cardRef = React.useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
   return (
     <div 
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className={cn(
-        "relative min-h-[400px] rounded-[32px] overflow-hidden transition-all duration-700 ease-out border cursor-default group/card",
+        "relative min-h-[340px] rounded-[32px] transition-all duration-300 ease-out border cursor-default overflow-hidden group",
         isActive 
-          ? "bg-[#183A2C] border-[#C9A75A] scale-[1.015] -translate-y-2 shadow-2xl z-20" 
-          : "bg-[#FAF8F2] border-[#183A2C]/10 z-10",
-        isAnyActive && !isActive ? "opacity-60 scale-[0.985] blur-[1px]" : "opacity-100"
+          ? "bg-[#123B2B] border-[#C9A75A] shadow-[0_20px_50px_rgba(18,59,43,0.3)] scale-[1.02] z-20" 
+          : "bg-[#FAF8F2] border-[#183A2C]/10 z-10 hover:border-[#183A2C]/30"
       )}
     >
-      {/* 1. Subtle Radial Glow (Follows Mouse) */}
-      <div 
-        className="absolute pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(201,167,90,0.08), transparent 40%)`,
-          inset: 0,
-        }}
-      />
-
-      {/* 2. Corner Decorations (Oriental Style) */}
+      {/* Corner Decorations for Active State */}
       <div className={cn(
-        "absolute inset-4 pointer-events-none opacity-0 transition-opacity duration-700 delay-100",
+        "absolute inset-4 pointer-events-none opacity-0 transition-opacity duration-500",
         isActive && "opacity-100"
       )}>
-        <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[#C9A75A]/40 rounded-tl-sm" />
-        <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[#C9A75A]/40 rounded-tr-sm" />
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-[#C9A75A]/40 rounded-bl-sm" />
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-[#C9A75A]/40 rounded-br-sm" />
+        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#C9A75A]/40" />
+        <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#C9A75A]/40" />
+        <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#C9A75A]/40" />
+        <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#C9A75A]/40" />
       </div>
 
-      {/* 3. Background Artwork Decorations (Specific to each strategy) */}
+      {/* Default State Content */}
       <div className={cn(
-        "absolute inset-0 pointer-events-none opacity-[0.03] transition-all duration-1000 mix-blend-overlay",
-        isActive ? "opacity-[0.08] scale-110" : "scale-100"
+        "absolute inset-0 p-8 flex flex-col transition-all duration-300",
+        isActive ? "opacity-0 translate-y-4 pointer-events-none" : "opacity-100 translate-y-0"
       )}>
-        {strategy.decoration}
-      </div>
-
-      {/* 4. Default Content Layer */}
-      <div className={cn(
-        "absolute inset-0 p-10 flex flex-col items-center justify-center text-center transition-all duration-700 ease-in-out",
-        isActive ? "opacity-0 -translate-y-6 blur-sm" : "opacity-100 translate-y-0"
-      )}>
-        <span className="text-[10px] font-bold text-[#183A2C]/20 tracking-[0.4em] mb-6 uppercase">0{index + 1}</span>
-        <div className="w-16 h-16 bg-[#183A2C]/5 rounded-2xl flex items-center justify-center text-[#9AA59C] mb-8 transition-colors group-hover/card:text-[#C9A75A]">
-          {React.cloneElement(strategy.icon, { className: "w-8 h-8" })}
+        <span className="text-[10px] font-bold text-[#183A2C]/20 tracking-[0.4em] mb-auto uppercase">0{index + 1}</span>
+        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-[#123B2B] shadow-sm mb-6">
+          {React.cloneElement(strategy.icon, { className: "w-6 h-6" })}
         </div>
-        <h4 className="text-xl font-headline font-bold text-[#183A2C] tracking-normal">{strategy.title}</h4>
+        <h4 className="text-xl font-headline font-bold text-[#183A2C]">{strategy.title}</h4>
       </div>
 
-      {/* 5. Hover Detailed Content Layer */}
+      {/* Hover/Active State Content */}
       <div className={cn(
-        "absolute inset-0 p-10 flex flex-col text-white transition-all duration-700 ease-out",
-        isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12 pointer-events-none"
+        "absolute inset-0 p-8 flex flex-col text-white transition-all duration-300",
+        isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8 pointer-events-none"
       )}>
-        {/* Layer 1: Label */}
         <div className="flex justify-between items-start mb-6">
-          <div className="space-y-1">
-            <span className="block text-[10px] font-bold text-[#C9A75A] tracking-[0.2em] uppercase transition-all duration-700 delay-100">
-              {strategy.label}
-            </span>
-            <span className="block text-[8px] font-medium text-white/40 tracking-widest uppercase">Strategy Detail</span>
-          </div>
-          <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-[#C9A75A] hover:bg-[#C9A75A] hover:text-[#183A2C] transition-all duration-300">
-            <ArrowUpRight className="w-5 h-5" />
+          <span className="text-[10px] font-bold text-[#C9A75A] tracking-[0.2em] uppercase">
+            {strategy.label}
+          </span>
+          <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-[#C9A75A]">
+            <ArrowUpRight className="w-4 h-4" />
           </div>
         </div>
 
-        {/* Layer 2: Title */}
-        <h4 className="text-3xl font-headline font-bold text-white mb-6 tracking-wide transition-all duration-700 delay-200">
+        <h4 className="text-2xl font-headline font-bold text-white mb-4 leading-tight">
           {strategy.title}
         </h4>
 
-        {/* Layer 3: Core Description */}
-        <div className="relative mb-8 transition-all duration-700 delay-300">
-          <div className="absolute left-0 top-0 w-0.5 h-full bg-[#C9A75A]/30" />
-          <p className="pl-6 text-sm text-white/80 leading-relaxed italic font-light">
-            “{strategy.coreText}”
-          </p>
-        </div>
+        <p className="text-xs text-white/70 leading-relaxed mb-6 font-light">
+          {strategy.coreText}
+        </p>
 
-        {/* Layer 4: Bullets */}
-        <div className="space-y-3 mt-auto transition-all duration-700 delay-500">
-          <p className="text-[10px] font-bold text-[#C9A75A]/60 uppercase tracking-widest mb-4">执行要点 / EXECUTION</p>
+        <div className="space-y-2.5 mt-auto">
           {strategy.points.map((point: string, i: number) => (
-            <div key={i} className="flex items-center gap-3 group/item">
-              <div className="w-1 h-1 rounded-full bg-[#C9A75A] transition-transform duration-300 group-hover/item:scale-150" />
-              <span className="text-xs text-white/70 font-medium group-hover/item:text-white transition-colors">{point}</span>
+            <div key={i} className="flex items-center gap-2.5">
+              <div className="w-1 h-1 rounded-full bg-[#C9A75A]" />
+              <span className="text-[11px] text-white/80 font-medium">{point}</span>
             </div>
           ))}
         </div>
-
-        {/* Layer 5: Animated Bottom Line */}
-        <div className={cn(
-          "absolute bottom-0 left-0 h-[1px] bg-[#C9A75A] transition-all duration-1000 ease-in-out",
-          isActive ? "w-full" : "w-0"
-        )} />
+        
+        <div className="absolute bottom-0 left-0 h-[1px] bg-[#C9A75A] w-full origin-left scale-x-100 transition-transform duration-500" />
       </div>
     </div>
   );
@@ -253,18 +205,7 @@ export default function Home() {
         "草本成分视觉化展现",
         "产品场景化深度种草",
         "门店氛围内容持续沉淀"
-      ],
-      decoration: (
-        <svg className="w-full h-full" viewBox="0 0 100 100">
-          <pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse">
-            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          </pattern>
-          <rect width="100" height="100" fill="url(#gridPattern)" />
-          <circle cx="50" cy="50" r="1" fill="currentColor" />
-          <circle cx="20" cy="30" r="1" fill="currentColor" />
-          <circle cx="80" cy="70" r="1" fill="currentColor" />
-        </svg>
-      )
+      ]
     },
     {
       title: "KOL 联名合作",
@@ -275,14 +216,7 @@ export default function Home() {
         "本地生活方式博主试饮",
         "新式养生饮品深度测评",
         "联名限定茶饮内容共创"
-      ],
-      decoration: (
-        <svg className="w-full h-full" viewBox="0 0 100 100">
-          <circle cx="40" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          <circle cx="60" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          <line x1="40" y1="50" x2="60" y2="50" stroke="currentColor" strokeWidth="0.5" />
-        </svg>
-      )
+      ]
     },
     {
       title: "空间社交与打卡传播",
@@ -293,14 +227,7 @@ export default function Home() {
         "门店视觉核心记忆点打造",
         "季节限定陈列氛围营造",
         "社交打卡分享路径设计"
-      ],
-      decoration: (
-        <svg className="w-full h-full" viewBox="0 0 100 100">
-          <rect x="25" y="25" width="50" height="40" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          <circle cx="50" cy="45" r="10" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          <path d="M 30 25 L 35 20 L 65 20 L 70 25" fill="none" stroke="currentColor" strokeWidth="0.5" />
-        </svg>
-      )
+      ]
     },
     {
       title: "用户反馈与闭环追踪",
@@ -311,14 +238,7 @@ export default function Home() {
         "多维度口味反馈实时收集",
         "社媒评论深度情感追踪",
         "产品快速迭代依据支撑"
-      ],
-      decoration: (
-        <svg className="w-full h-full" viewBox="0 0 100 100">
-          <path d="M 50 20 A 30 30 0 1 1 49.9 20" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 2" />
-          <polyline points="45 15 50 20 45 25" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          <path d="M 30 50 Q 50 80 70 50" fill="none" stroke="currentColor" strokeWidth="0.5" />
-        </svg>
-      )
+      ]
     }
   ];
 
@@ -359,7 +279,7 @@ export default function Home() {
                 了解品牌
               </Button>
             </div>
-            <div className="flex items-center gap-8 pt-8 border-t border-primary/5">
+            <div className="flex items-center gap-8 pt-8 border-t border-primary/10">
               <div>
                 <p className="text-2xl font-headline font-bold text-primary">0 添加</p>
                 <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">草本成分</p>
@@ -532,7 +452,7 @@ export default function Home() {
                 </p>
                 <div className="pt-4">
                   <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-10 h-14 text-lg font-bold group/btn">
-                    立即开启智慧选茶 <ChevronRight className="ml-2 w-5 h-5 transition-transform group-hover/btn:translate-x-2" />
+                    立即开启智慧选茶 <ChevronRight className="ml-2 w-5 h-5 transition-transform group/btn:translate-x-2" />
                   </Button>
                 </div>
               </div>
@@ -666,51 +586,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Operations Strategy (RECONFIGURED) */}
-      <section id="strategy" className="py-24 bg-[#F7F4EC] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
-          <div className="absolute inset-0 bg-texture"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
-            <div className="space-y-12">
+      {/* 7. Operations Strategy (Optimized) */}
+      <section id="strategy" className="py-32 bg-[#F7F4EC] relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-[42fr,58fr] gap-16 lg:gap-24 items-start">
+            <div className="space-y-12 animate-fade-in-up">
               <div className="space-y-6">
-                <Badge className="bg-secondary/10 text-secondary border-[#C9A75A]/20">STRATEGY</Badge>
-                <h3 className="text-5xl font-headline font-bold text-primary leading-tight">打造社交媒体驱动的<br />内容矩阵</h3>
-                <p className="text-xl text-[#4C5A52] leading-relaxed max-w-lg">
+                <Badge className="bg-[#123B2B]/10 text-[#123B2B] border-[#123B2B]/20 px-4 py-1.5 font-bold tracking-widest">OPERATIONS STRATEGY</Badge>
+                <h3 className="text-5xl lg:text-6xl font-headline font-bold text-[#183A2C] leading-tight">
+                  打造社交媒体驱动的<br />内容矩阵
+                </h3>
+                <p className="text-lg text-[#4C5A52] leading-relaxed max-w-lg">
                   我们不只是卖茶，更是在运营一个关于“东方草本生活方式”的内容 IP。通过分层次、多维度的感官触达，让品牌深度根植于消费者的审美心智。
                 </p>
               </div>
-              <div className="space-y-8">
+              
+              <div className="grid gap-6 pt-4">
                 {[
-                  { title: "美学沉淀", desc: "以东方色彩美学为基调，产出极具辨识度的高颜值产品视觉内容。" },
-                  { title: "文化破圈", desc: "打破中药与茶饮的界限，用年轻化语言解构传统草本的养生智慧。" },
-                  { title: "全链路闭环", desc: "从线上种草到线下体验，构建一个自发传播、高频互动的社交场域。" }
+                  { title: "美学沉淀", desc: "以东方色彩美学为基调，产出极具辨识度的高颜值产品视觉内容。", icon: <Palette className="w-5 h-5" /> },
+                  { title: "文化破圈", desc: "打破中药与茶饮的界限，用年轻化语言解构传统草本的养生智慧。", icon: <Zap className="w-5 h-5" /> },
+                  { title: "全链路闭环", desc: "从线上种草到线下体验，构建一个自发传播、高频互动的社交场域。", icon: <RefreshCw className="w-5 h-5" /> }
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-6 group">
-                    <div className="mt-2 w-1.5 h-1.5 bg-[#C9A75A] rounded-full shrink-0 group-hover:scale-150 transition-transform" />
-                    <div>
-                      <h4 className="font-bold text-primary text-xl mb-2">{item.title}</h4>
-                      <p className="text-base text-[#4C5A52]/80 leading-relaxed">{item.desc}</p>
+                  <div key={i} className="flex gap-6 p-6 rounded-3xl border border-[#183A2C]/5 bg-white/50 hover:bg-white transition-all group">
+                    <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#123B2B] group-hover:bg-[#123B2B] group-hover:text-white transition-all">
+                      {item.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-[#183A2C] text-lg mb-1">{item.title}</h4>
+                      <p className="text-sm text-[#4C5A52]/80 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
-              {/* Floating decorative elements */}
-              <div className="absolute -top-16 -right-16 w-64 h-64 bg-secondary/5 rounded-full blur-[80px] pointer-events-none" />
-              <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-primary/5 rounded-full blur-[60px] pointer-events-none" />
-              
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
               {strategies.map((strategy, i) => (
                 <StrategyCard 
                   key={i}
                   index={i}
                   strategy={strategy}
                   isActive={hoveredStrategyIdx === i}
-                  isAnyActive={hoveredStrategyIdx !== null}
                   onMouseEnter={() => setHoveredStrategyIdx(i)}
                   onMouseLeave={() => setHoveredStrategyIdx(null)}
                 />
@@ -852,4 +768,3 @@ export default function Home() {
     </main>
   );
 }
-

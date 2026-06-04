@@ -29,7 +29,7 @@ export function Navbar() {
       const sections = navItems.map(item => item.href.substring(1));
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
-        if (element && element.getBoundingClientRect().top <= 100) {
+        if (element && element.getBoundingClientRect().top <= 120) {
           setActiveSection(section);
           break;
         }
@@ -57,28 +57,30 @@ export function Navbar() {
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
-      isScrolled ? "bg-background/90 backdrop-blur-md shadow-sm border-b border-primary/5" : "bg-transparent"
+      isScrolled ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-primary/5" : "bg-transparent"
     )}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-[1280px] mx-auto flex items-center justify-between">
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="flex items-center gap-2 group cursor-pointer"
         >
-          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-headline font-bold text-lg group-hover:bg-secondary transition-colors">
+          <div className="w-8 h-8 bg-[#123B2B] rounded-full flex items-center justify-center text-primary-foreground font-headline font-bold text-lg group-hover:bg-secondary transition-colors">
             山
           </div>
-          <span className="font-headline font-bold text-2xl tracking-tight text-primary">山宁 SHANNING</span>
+          <span className="font-headline font-bold text-2xl tracking-tight text-[#123B2B]">山宁 SHANNING</span>
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <button
               key={item.href}
               onClick={() => handleNavClick(item.href)}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-secondary",
-                activeSection === item.href.substring(1) ? "text-primary font-bold border-b-2 border-secondary" : "text-muted-foreground"
+                "text-[13px] font-bold transition-all hover:text-secondary uppercase tracking-widest relative py-1",
+                activeSection === item.href.substring(1) 
+                  ? "text-[#123B2B] after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-secondary" 
+                  : "text-[#123B2B]/40"
               )}
             >
               {item.label}
@@ -86,8 +88,8 @@ export function Navbar() {
           ))}
           <Button 
             variant="default" 
-            className="bg-primary hover:bg-primary/90 rounded-full px-6 ml-4"
-            onClick={() => handleNavClick('#menu')}
+            className="bg-[#123B2B] hover:bg-[#123B2B]/90 rounded-full px-8 ml-4 font-bold text-xs tracking-widest h-10"
+            onClick={() => window.open('/menu', '_blank')}
           >
             查看菜单
           </Button>
@@ -112,15 +114,15 @@ export function Navbar() {
               onClick={() => handleNavClick(item.href)}
               className={cn(
                 "text-lg font-medium py-2 text-left",
-                activeSection === item.href.substring(1) ? "text-primary font-bold" : "text-muted-foreground"
+                activeSection === item.href.substring(1) ? "text-[#123B2B] font-bold" : "text-muted-foreground"
               )}
             >
               {item.label}
             </button>
           ))}
           <Button 
-            className="w-full bg-primary hover:bg-primary/90 mt-2"
-            onClick={() => handleNavClick('#menu')}
+            className="w-full bg-[#123B2B] hover:bg-[#123B2B]/90 mt-2 rounded-full"
+            onClick={() => window.open('/menu', '_blank')}
           >
             查看菜单
           </Button>
