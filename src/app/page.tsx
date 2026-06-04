@@ -27,7 +27,8 @@ import {
   Info,
   ChevronRight,
   MessageSquare,
-  Camera
+  Camera,
+  ArrowUpRight
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
@@ -114,39 +115,39 @@ export default function Home() {
   const strategies = [
     {
       title: "社交媒体内容矩阵",
-      icon: <MessageSquare className="w-8 h-8" />,
+      icon: <MessageSquare className="w-10 h-10" />,
       target: "占领年轻消费者心智",
-      execution: "小红书、Instagram 深度种草，发布具有东方美学韵味的高颜值产品视觉。",
+      execution: "小红书、Instagram 深度种草，发布具有东方美学韵味的高颜值视觉。",
       platform: "小红书、Instagram",
-      result: "月均触达 10w+ 精准本地受众",
+      result: "月均触达 10w+ 精准受众",
       assets: "专业摄影稿、博主探店视频"
     },
     {
       title: "KOL 联名合作",
-      icon: <Users className="w-8 h-8" />,
+      icon: <Users className="w-10 h-10" />,
       target: "提升品牌信任度与破圈",
-      execution: "联合澳门本地具有影响力的 KOC 进行真实测评，打造“年轻人的第一杯中药茶”话题。",
+      execution: "联合澳门本地具有影响力的 KOC 进行真实测评，打造“年轻人的第一杯中药茶”。",
       platform: "Facebook、本地社群",
       result: "实现品牌声量阶梯式增长",
-      assets: "联名杯套、KOL专属优惠码"
+      assets: "联名杯套、专属优惠码"
     },
     {
       title: "空间社交与打卡传播",
-      icon: <Camera className="w-8 h-8" />,
+      icon: <Camera className="w-10 h-10" />,
       target: "引导用户自发性二次传播",
       execution: "通过极具氛围感的门店装修与季节限定礼盒，配套精致周边激发分享欲望。",
       platform: "社交媒体全平台",
-      result: "UGC（用户原创内容）产出率提升 40%",
-      assets: "艺术装置、季节限定插画"
+      result: "UGC 产出率提升 40%+",
+      assets: "艺术装置、限定插画"
     },
     {
       title: "用户反馈与闭环追踪",
-      icon: <TrendingUp className="w-8 h-8" />,
+      icon: <TrendingUp className="w-10 h-10" />,
       target: "建立长期复购与忠诚度",
-      execution: "建立会员积分体系，通过数字化工具收集口味偏好，精准推送季节新品资讯。",
-      platform: "私域流量池 (WeChat/WhatsApp)",
+      execution: "建立会员积分体系，通过数字化工具收集偏好，精准推送季节新品。",
+      platform: "私域 (WeChat/WA)",
       result: "复购率较传统茶饮提升 25%",
-      assets: "会员系统、数字化营销看板"
+      assets: "会员系统、营销看板"
     }
   ];
 
@@ -334,7 +335,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Entrance Section (Teaser with external link) */}
+      {/* AI Entrance Section */}
       <section id="tea-ai" className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <Link 
@@ -343,7 +344,6 @@ export default function Home() {
             rel="noopener noreferrer"
             className="group block relative rounded-[3rem] overflow-hidden bg-primary p-12 md:p-20 text-white shadow-2xl transition-transform hover:scale-[1.01]"
           >
-            {/* Decorative background elements */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/10 -skew-x-12 translate-x-1/4 pointer-events-none group-hover:bg-secondary/20 transition-colors duration-500"></div>
             <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
             
@@ -495,8 +495,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Operations Strategy - INTERACTIVE VERSION */}
-      <section id="strategy" className="py-24 bg-white relative">
+      {/* 7. Operations Strategy - CREATIVE INTERACTIVE VERSION */}
+      <section id="strategy" className="py-24 bg-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
           <div className="absolute inset-0 bg-texture"></div>
           <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -512,8 +512,8 @@ export default function Home() {
             <div className="space-y-10">
               <div className="space-y-4">
                 <Badge className="bg-secondary">STRATEGY</Badge>
-                <h3 className="text-4xl font-headline font-bold text-primary">打造社交媒体驱动的内容矩阵</h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <h3 className="text-5xl font-headline font-bold text-primary">打造社交媒体驱动的内容矩阵</h3>
+                <p className="text-xl text-muted-foreground leading-relaxed">
                   我们不只是卖茶，更是在运营一个关于“东方草本生活方式”的内容 IP。通过多维度的内容触达，让品牌进入消费者的心智。
                 </p>
               </div>
@@ -526,8 +526,8 @@ export default function Home() {
                   <div key={i} className="flex gap-4">
                     <div className="mt-1.5 w-2 h-2 bg-secondary rounded-full shrink-0"></div>
                     <div>
-                      <h4 className="font-bold text-primary mb-1">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
+                      <h4 className="font-bold text-primary text-lg mb-1">{item.title}</h4>
+                      <p className="text-base text-muted-foreground">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -543,37 +543,52 @@ export default function Home() {
                   onMouseLeave={() => setActiveStrategyId(null)}
                   onClick={() => setActiveStrategyId(activeStrategyId === i ? null : i)}
                   className={cn(
-                    "bg-white p-8 rounded-[2rem] shadow-sm border border-primary/5 flex flex-col items-center justify-center text-center space-y-4 transition-all duration-500 cursor-pointer relative overflow-hidden",
+                    "bg-white p-10 rounded-[2.5rem] shadow-sm border border-primary/5 flex flex-col items-center justify-center text-center space-y-6 transition-all duration-500 cursor-pointer relative overflow-hidden min-h-[280px]",
                     activeStrategyId === i ? "ring-2 ring-secondary/50 shadow-2xl scale-[1.05] z-20" : "hover:shadow-md hover:-translate-y-1"
                   )}
                 >
                   <div className={cn(
-                    "transition-transform duration-500",
-                    activeStrategyId === i ? "scale-110 text-secondary" : "text-primary/60"
+                    "transition-all duration-500 transform",
+                    activeStrategyId === i ? "scale-110 text-secondary" : "text-primary/40"
                   )}>
                     {strategy.icon}
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-primary/80">{strategy.title}</span>
+                  <span className="text-sm font-bold uppercase tracking-[0.2em] text-primary/80">{strategy.title}</span>
                   
-                  {/* Detailed Popup on Hover */}
+                  {/* Creative Detail Overlay */}
                   <div className={cn(
-                    "absolute inset-0 bg-primary p-6 text-white text-left flex flex-col justify-center transition-all duration-500",
+                    "absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/95 p-8 text-white text-left flex flex-col transition-all duration-700 ease-in-out",
                     activeStrategyId === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"
                   )}>
-                    <h5 className="font-bold text-secondary text-sm mb-3"># {strategy.title}</h5>
-                    <div className="space-y-3">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center text-secondary border border-secondary/20">
+                        <ArrowUpRight className="w-5 h-5" />
+                      </div>
+                      <span className="text-[10px] font-bold text-secondary uppercase tracking-widest bg-secondary/10 px-2 py-1 rounded-full border border-secondary/20">Strategy Detail</span>
+                    </div>
+                    
+                    <h5 className="font-headline font-bold text-2xl text-secondary mb-4 leading-tight">{strategy.title}</h5>
+                    
+                    <div className="space-y-5 flex-grow">
                       <div>
-                        <p className="text-[10px] font-bold text-white/40 uppercase tracking-tighter">目标 / 效果</p>
-                        <p className="text-[11px] leading-snug">{strategy.target} · {strategy.result}</p>
+                        <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">执行计划 / 平台</p>
+                        <p className="text-sm leading-relaxed text-white/90">{strategy.execution}</p>
                       </div>
-                      <div>
-                        <p className="text-[10px] font-bold text-white/40 uppercase tracking-tighter">执行 / 素材</p>
-                        <p className="text-[11px] leading-snug">{strategy.execution}</p>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">预期成果</p>
+                          <p className="text-xs text-secondary font-bold">{strategy.result}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">关键素材</p>
+                          <p className="text-xs text-white/80">{strategy.assets}</p>
+                        </div>
                       </div>
-                      <div className="pt-2 border-t border-white/10 flex items-center justify-between">
-                        <span className="text-[9px] font-bold text-secondary uppercase">{strategy.platform}</span>
-                        <ChevronRight className="w-3 h-3 text-secondary" />
-                      </div>
+                    </div>
+                    
+                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-secondary/80 uppercase tracking-tighter">{strategy.platform}</span>
+                      <Sparkles className="w-4 h-4 text-secondary animate-pulse" />
                     </div>
                   </div>
                 </div>
@@ -583,7 +598,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Store Locations - INTERACTIVE VERSION */}
+      {/* 8. Store Locations */}
       <section id="location" className="py-24 bg-primary/5 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
