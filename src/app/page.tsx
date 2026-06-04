@@ -3,14 +3,15 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Navbar } from '@/components/brand/Navbar';
 import { TeaRecommendation } from '@/components/brand/TeaRecommendation';
 import { SeasonalMenu } from '@/components/brand/SeasonalMenu';
 import { ContactSection } from '@/components/brand/ContactSection';
 import { Footer } from '@/components/brand/Footer';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { 
   Leaf, 
   Wind, 
@@ -25,13 +26,17 @@ import {
   Zap,
   Check,
   MapPin,
-  Info
+  Info,
+  ChevronRight,
+  MessageSquare,
+  Camera
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 
 export default function Home() {
   const [activeLocId, setActiveLocId] = useState<string | null>(null);
+  const [activeStrategyId, setActiveStrategyId] = useState<number | null>(null);
 
   const getImg = (id: string) => PlaceHolderImages.find(img => img.id === id);
   const heroImg = getImg('hero-main');
@@ -42,7 +47,9 @@ export default function Home() {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
       if (type) {
-        window.dispatchEvent(new CustomEvent('set-consult-type', { detail: type }));
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('set-consult-type', { detail: type }));
+        }, 100);
       }
     }
   };
@@ -115,6 +122,45 @@ export default function Home() {
       advice: "适合快取店、外卖店或小面积标准店，重点支持预订、团购、工作日套餐和企业合作。",
       imgId: "loc-office",
       alt: "商务写字楼、职场茶歇场景"
+    }
+  ];
+
+  const strategies = [
+    {
+      title: "社交媒体内容矩阵",
+      icon: <MessageSquare className="w-8 h-8" />,
+      target: "占领年轻消费者心智",
+      execution: "小红书、Instagram 深度种草，发布具有东方美学韵味的高颜值产品视觉。",
+      platform: "小红书、Instagram",
+      result: "月均触达 10w+ 精准本地受众",
+      assets: "专业摄影稿、博主探店视频"
+    },
+    {
+      title: "KOL 联名合作",
+      icon: <Users className="w-8 h-8" />,
+      target: "提升品牌信任度与破圈",
+      execution: "联合澳门本地具有影响力的 KOC 进行真实测评，打造“年轻人的第一杯中药茶”话题。",
+      platform: "Facebook、本地社群",
+      result: "实现品牌声量阶梯式增长",
+      assets: "联名杯套、KOL专属优惠码"
+    },
+    {
+      title: "空间社交与打卡传播",
+      icon: <Camera className="w-8 h-8" />,
+      target: "引导用户自发性二次传播",
+      execution: "通过极具氛围感的门店装修与季节限定礼盒，配套精致周边激发分享欲望。",
+      platform: "社交媒体全平台",
+      result: "UGC（用户原创内容）产出率提升 40%",
+      assets: "艺术装置、季节限定插画"
+    },
+    {
+      title: "用户反馈与闭环追踪",
+      icon: <TrendingUp className="w-8 h-8" />,
+      target: "建立长期复购与忠诚度",
+      execution: "建立会员积分体系，通过数字化工具收集口味偏好，精准推送季节新品资讯。",
+      platform: "私域流量池 (WeChat/WhatsApp)",
+      result: "复购率较传统茶饮提升 25%",
+      assets: "会员系统、数字化营销看板"
     }
   ];
 
@@ -398,7 +444,7 @@ export default function Home() {
               </ul>
               <Button 
                 onClick={() => scrollToContact('加盟咨询')}
-                className="w-full bg-white text-secondary hover:bg-white/90 font-bold h-14 rounded-2xl text-lg mt-4"
+                className="w-full bg-white text-secondary hover:bg-white/90 font-bold h-14 rounded-2xl text-lg mt-4 shadow-lg shadow-black/20"
               >
                 立即加盟
               </Button>
@@ -407,7 +453,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Operations Strategy */}
+      {/* 7. Operations Strategy - INTERACTIVE VERSION */}
       <section id="strategy" className="py-24 bg-white relative">
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
           <div className="absolute inset-0 bg-texture"></div>
@@ -420,7 +466,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
               <div className="space-y-4">
                 <Badge className="bg-secondary">STRATEGY</Badge>
@@ -445,17 +491,49 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="bg-primary/5 rounded-[3rem] p-12 border grid grid-cols-2 gap-6 relative">
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-secondary/10 rounded-full blur-2xl"></div>
-              {[
-                { icon: <Users className="w-10 h-10 text-primary" />, label: "达人联名" },
-                { icon: <TrendingUp className="w-10 h-10 text-primary" />, label: "流量追踪" },
-                { icon: <Zap className="w-10 h-10 text-primary" />, label: "话题热度" },
-                { icon: <Heart className="w-10 h-10 text-primary" />, label: "用户忠诚" }
-              ].map((item, i) => (
-                <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-primary/5 flex flex-col items-center justify-center text-center space-y-4 hover:shadow-xl transition-all hover:-translate-y-1 group">
-                  <div className="group-hover:scale-110 transition-transform">{item.icon}</div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-primary/60">{item.label}</span>
+            
+            <div className="grid grid-cols-2 gap-6 relative">
+              <div className="absolute -top-12 -right-12 w-48 h-48 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+              {strategies.map((strategy, i) => (
+                <div 
+                  key={i} 
+                  onMouseEnter={() => setActiveStrategyId(i)}
+                  onMouseLeave={() => setActiveStrategyId(null)}
+                  onClick={() => setActiveStrategyId(activeStrategyId === i ? null : i)}
+                  className={cn(
+                    "bg-white p-8 rounded-[2rem] shadow-sm border border-primary/5 flex flex-col items-center justify-center text-center space-y-4 transition-all duration-500 cursor-pointer relative overflow-hidden",
+                    activeStrategyId === i ? "ring-2 ring-secondary/50 shadow-2xl scale-[1.05] z-20" : "hover:shadow-md hover:-translate-y-1"
+                  )}
+                >
+                  <div className={cn(
+                    "transition-transform duration-500",
+                    activeStrategyId === i ? "scale-110 text-secondary" : "text-primary/60"
+                  )}>
+                    {strategy.icon}
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-primary/80">{strategy.title}</span>
+                  
+                  {/* Detailed Popup on Hover */}
+                  <div className={cn(
+                    "absolute inset-0 bg-primary p-6 text-white text-left flex flex-col justify-center transition-all duration-500",
+                    activeStrategyId === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full pointer-events-none"
+                  )}>
+                    <h5 className="font-bold text-secondary text-sm mb-3"># {strategy.title}</h5>
+                    <div className="space-y-3">
+                      <div>
+                        <p className="text-[10px] font-bold text-white/40 uppercase tracking-tighter">目标 / 效果</p>
+                        <p className="text-[11px] leading-snug">{strategy.target} · {strategy.result}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold text-white/40 uppercase tracking-tighter">执行 / 素材</p>
+                        <p className="text-[11px] leading-snug">{strategy.execution}</p>
+                      </div>
+                      <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                        <span className="text-[9px] font-bold text-secondary uppercase">{strategy.platform}</span>
+                        <ChevronRight className="w-3 h-3 text-secondary" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -488,7 +566,7 @@ export default function Home() {
                     isActive ? "ring-2 ring-secondary/50 shadow-2xl scale-[1.02] z-20" : "hover:shadow-lg"
                   )}
                 >
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-44 overflow-hidden">
                     {img && (
                       <Image 
                         src={img.imageUrl} 
@@ -516,7 +594,6 @@ export default function Home() {
                       {loc.crowd}
                     </p>
                     
-                    {/* Detailed Content - Smooth Expansion */}
                     <div className={cn(
                       "overflow-hidden transition-all duration-500 space-y-4",
                       isActive ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0"
