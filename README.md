@@ -2,37 +2,50 @@
 
 这是一个基于 Next.js 15 和 Firebase 构建的新式中药健康茶饮品牌原型。
 
-## 如何让别人看到我的网站？
+## 如何下载并在本地运行？
 
-要将此项目发布到互联网上，您需要执行两个主要步骤：**托管代码到 GitHub** 和 **部署到 Firebase App Hosting**。
+如果你已经从平台上下载了项目的 ZIP 压缩包，请按照以下步骤在你的电脑上运行：
+
+1. **解压文件**：将下载的压缩包解压到你的工作目录。
+2. **安装依赖**：在项目根目录下运行终端（Terminal），执行：
+   ```bash
+   npm install
+   ```
+3. **启动开发服务器**：
+   ```bash
+   npm run dev
+   ```
+4. **访问网站**：打开浏览器访问 `http://localhost:9002`。
+
+---
+
+## 如何发布上线让别人看到？
+
+要将此项目发布到互联网上，建议使用 **GitHub** + **Firebase App Hosting**。
 
 ### 第一步：将代码推送到 GitHub
 
-1. **登录 GitHub**：访问 [github.com](https://github.com/) 并创建一个新的仓库（Repository），命名为 `shanning-tea`。
-2. **在终端初始化 Git**：
+1. **在 GitHub 创建仓库**：访问 [github.com](https://github.com/) 创建名为 `shanning-tea` 的新仓库。
+2. **推送代码**：
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: 山宁品牌网站原型"
-   ```
-3. **关联远程仓库并推送**：
-   （请将下面的 `<your-username>` 替换为您的 GitHub 用户名）
-   ```bash
-   git remote add origin https://github.com/<your-username>/shanning-tea.git
+   git commit -m "Initial commit"
+   git remote add origin https://github.com/<你的用户名>/shanning-tea.git
    git branch -M main
    git push -u origin main
    ```
 
-### 第二步：使用 Firebase App Hosting 部署
+### 第二步：使用 Firebase 部署
 
-1. **访问 Firebase 控制台**：前往 [Firebase Console](https://console.firebase.google.com/)。
-2. **创建项目**：点击“添加项目”并按照指引操作。
-3. **设置 App Hosting**：
-   - 在侧边栏找到“构建” -> “App Hosting”。
-   - 点击“开始使用”并连接您的 GitHub 账号。
-   - 选择您刚刚创建的 `shanning-tea` 仓库。
-   - 保持默认设置，点击“部署”。
-4. **获取网址**：部署完成后，Firebase 会在仪表板中为您提供一个自动生成的域名（如 `https://shanning-tea.web.app`）。
+1. **打包（Build）**：如果你想手动打包，可以运行：
+   ```bash
+   npm run build
+   ```
+   这会生成一个 `.next` 文件夹，里面是优化后的生产环境代码。
+2. **自动部署**：在 [Firebase Console](https://console.firebase.google.com/) 中开启 **App Hosting**，连接你的 GitHub 仓库，Firebase 会自动帮你完成“打包”和“发布”的全过程。
+
+---
 
 ## 技术栈
 
@@ -41,10 +54,8 @@
 - **AI 功能**: Genkit (Gemini 2.5 Flash)
 - **后端服务**: Firebase App Hosting
 
-## 本地开发
+## 开发指令
 
-```bash
-npm run dev
-```
-
-打开 [http://localhost:9002](http://localhost:9002) 查看效果。
+- `npm run dev`: 启动本地开发预览。
+- `npm run build`: 构建用于生产环境的压缩包。
+- `npm run start`: 运行构建后的生产环境版本。
