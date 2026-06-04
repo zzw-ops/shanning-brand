@@ -41,6 +41,36 @@
       "description": "Subtle oriental paper texture",
       "imageUrl": "https://picsum.photos/seed/shanning-texture/1920/1080",
       "imageHint": "paper texture"
+    },
+    {
+      "id": "loc-commercial",
+      "description": "High-end urban shopping district",
+      "imageUrl": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop",
+      "imageHint": "shopping district"
+    },
+    {
+      "id": "loc-university",
+      "description": "Modern university campus life",
+      "imageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop",
+      "imageHint": "university campus"
+    },
+    {
+      "id": "loc-cultural",
+      "description": "Creative and artistic street corner",
+      "imageUrl": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop",
+      "imageHint": "creative district"
+    },
+    {
+      "id": "loc-tourist",
+      "description": "Iconic Macau heritage street",
+      "imageUrl": "https://images.unsplash.com/photo-1583212292454-1fe6229603b7?q=80&w=800&auto=format&fit=crop",
+      "imageHint": "macau street"
+    },
+    {
+      "id": "loc-office",
+      "description": "Sophisticated modern office area",
+      "imageUrl": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
+      "imageHint": "office building"
     }
   ]
 }

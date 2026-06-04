@@ -1,7 +1,7 @@
 
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Navbar } from '@/components/brand/Navbar';
@@ -26,11 +26,16 @@ import {
   Zap,
   Check,
   MapPin,
-  ArrowRight
+  ArrowRight,
+  Coffee,
+  Info
 } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { cn } from '@/lib/utils';
 
 export default function Home() {
+  const [activeLocId, setActiveLocId] = useState<string | null>(null);
+
   const getImg = (id: string) => PlaceHolderImages.find(img => img.id === id);
   const heroImg = getImg('hero-main');
   const macauImg = getImg('macau-lifestyle');
@@ -45,15 +50,68 @@ export default function Home() {
     }
   };
 
-  const scrollToProducts = () => {
-    const el = document.getElementById('products');
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const scrollToBrand = () => {
-    const el = document.getElementById('brand');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const locations = [
+    {
+      id: "commercial",
+      name: "核心商业区",
+      crowd: "职场白领、购物人群",
+      audience: "白领、购物人群、年轻情侣、午后休闲消费者，人流集中，消费决策快。",
+      scene: "逛街途中、午后茶饮、朋友小聚、饭后解腻、社交打卡。",
+      products: "桂花乌龙草本茶、薄荷陈皮草本茶、茉莉陈皮轻养茶。",
+      advice: "适合开设视觉识别度高的小型精品店或快取店，重点强化门头设计、外带杯视觉和社交媒体传播。",
+      imgId: "loc-commercial",
+      alt: "高端商业街、购物中心场景"
+    },
+    {
+      id: "university",
+      name: "高校周边",
+      crowd: "Z世代学生、年轻教师",
+      audience: "年轻学生、教师、社团人群、轻社交消费群体，对价格、颜值和新鲜感敏感。",
+      scene: "课间饮品、学习陪伴、社团聚会、朋友分享、考试季轻养生需求。",
+      products: "茉莉陈皮轻养茶、柠檬荷叶轻饮、菊花雪梨润茶。",
+      advice: "适合做轻量化门店，突出年轻化包装、联名活动、学生优惠和社交平台打卡传播。",
+      imgId: "loc-university",
+      alt: "校园周边、年轻学生生活场景"
+    },
+    {
+      id: "cultural",
+      name: "文创街区",
+      crowd: "精致生活追求者、游客",
+      audience: "文艺青年、游客、设计爱好者、生活方式消费者，对空间氛围和品牌故事敏感。",
+      scene: "拍照打卡、慢生活体验、下午茶、城市漫游、品牌体验。",
+      products: "桂花乌龙草本茶、雪梨百合润茶、四季限定系列。",
+      advice: "适合做品牌形象店，重点强化东方植物美学、空间设计、香气体验和产品陈列。",
+      imgId: "loc-cultural",
+      alt: "文艺街区、设计感门店场景"
+    },
+    {
+      id: "tourist",
+      name: "旅游景区",
+      crowd: "外地游客、文化寻根者",
+      audience: "游客、本地陪同人群、文化体验消费者，对地域特色和伴手礼属性有兴趣。",
+      scene: "旅行途中、景区休息、澳门特色体验、伴手礼购买、社交分享。",
+      products: "陈皮普洱暖饮、四季限定系列、桂花乌龙草本茶。",
+      advice: "适合突出澳门地域文化和东方草本特色，可以增加伴手礼包装、限定杯套和旅游纪念属性。",
+      imgId: "loc-tourist",
+      alt: "澳门历史城区、游客消费场景"
+    },
+    {
+      id: "office",
+      name: "写字楼附近",
+      crowd: "商务茶歇、外卖刚需",
+      audience: "白领、商务人群、会议人群、工作日高频消费人群，对效率、健康感和稳定品质敏感。",
+      scene: "午后提神、饭后解腻、会议茶饮、加班陪伴、企业团购。",
+      products: "薄荷陈皮草本茶、桂圆枸杞暖润茶、红枣桂圆姜茶。",
+      advice: "适合快取店、外卖店或小面积标准店，重点支持预订、团购、工作日套餐和企业合作。",
+      imgId: "loc-office",
+      alt: "商务写字楼、职场茶歇场景"
+    }
+  ];
 
   return (
     <main className="min-h-screen">
@@ -78,7 +136,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-5 pt-4">
               <Button 
                 size="lg" 
-                onClick={scrollToProducts}
+                onClick={() => scrollToSection('products')}
                 className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 h-14 text-lg shadow-xl shadow-primary/20"
               >
                 探索产品
@@ -86,7 +144,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                onClick={scrollToBrand}
+                onClick={() => scrollToSection('brand')}
                 className="border-primary text-primary hover:bg-primary/5 rounded-full px-10 h-14 text-lg"
               >
                 了解品牌
@@ -150,19 +208,19 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-10">
             {[
               { 
-                imgId: "vision-herb",
+                imgId: "loc-cultural",
                 icon: <Leaf className="w-10 h-10 text-primary" />, 
                 title: "草本入饮", 
                 desc: "精选药食同源草本原料，保留天然植物活性。通过现代冷泡与萃取工艺，释放自然草本之美。" 
               },
               { 
-                imgId: "vision-season",
+                imgId: "winter-visual",
                 icon: <Wind className="w-10 h-10 text-primary" />, 
                 title: "四季调养", 
                 desc: "顺应二十四节气，根据气候变化设计差异化饮品。在春生、夏长、秋收、冬藏中平衡身体需求。" 
               },
               { 
-                imgId: "vision-young",
+                imgId: "macau-lifestyle",
                 icon: <Users className="w-10 h-10 text-primary" />, 
                 title: "年轻表达", 
                 desc: "用现代视觉语言重塑东方养生。打造高颜值、社交媒体友好且富有文化深度的品牌体验。" 
@@ -203,7 +261,6 @@ export default function Home() {
 
       {/* 3. Product Highlights */}
       <section id="products" className="py-24 bg-white relative">
-        {/* Rich Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none overflow-hidden">
           <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-secondary rounded-full blur-[120px]"></div>
           <div className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-primary rounded-full blur-[120px]"></div>
@@ -401,43 +458,87 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Store Locations */}
-      <section id="location" className="py-24 bg-primary/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
+      {/* 8. Store Locations - INTERACTIVE VERSION */}
+      <section id="location" className="py-24 bg-primary/5 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16 space-y-4 max-w-2xl mx-auto">
+            <Badge variant="secondary" className="bg-secondary/10 text-secondary border-none px-4 py-1">STORE LOCATION</Badge>
             <h2 className="text-4xl font-headline font-bold text-primary">理想门店选址</h2>
-            <p className="text-muted-foreground">精准切入高净值人流与生活场景，构建多维品牌接触点。</p>
+            <p className="text-muted-foreground">基于用户画像与消费频次分析，我们锁定了五大极具爆发力的商业场景。</p>
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { imgId: "loc-commercial", name: "核心商业区", crowd: "职场白领、购物人群", advice: "适合开设品牌旗舰店，强化视觉传达。" },
-              { imgId: "loc-university", name: "高校周边", crowd: "Z世代学生、年轻教师", advice: "侧重社交互动与外带便利，打造打卡点。" },
-              { imgId: "loc-cultural", name: "文创街区", crowd: "精致生活追求者、游客", advice: "结合美学工坊概念，提供深度沉浸体验。" },
-              { imgId: "loc-tourist", name: "旅游景区", crowd: "外地游客、文化寻根者", advice: "适合伴手礼化产品，推广澳门草本名片。" },
-              { imgId: "loc-office", name: "写字楼附近", crowd: "商务茶歇、外卖刚需", advice: "主打高效快取，建立稳定的日常订购习惯。" }
-            ].map((loc, i) => {
+            {locations.map((loc) => {
               const img = getImg(loc.imgId);
+              const isActive = activeLocId === loc.id;
+              
               return (
-                <div key={i} className="bg-white rounded-[2rem] border border-primary/5 overflow-hidden hover:shadow-2xl transition-all duration-500 group cursor-default shadow-sm">
-                  <div className="relative h-32">
+                <div 
+                  key={loc.id} 
+                  onMouseEnter={() => setActiveLocId(loc.id)}
+                  onMouseLeave={() => setActiveLocId(null)}
+                  onClick={() => setActiveLocId(activeLocId === loc.id ? null : loc.id)}
+                  className={cn(
+                    "bg-white rounded-[2rem] border border-primary/5 overflow-hidden transition-all duration-500 cursor-pointer shadow-sm relative flex flex-col group",
+                    isActive ? "ring-2 ring-secondary/50 shadow-2xl scale-[1.02] z-20" : "hover:shadow-lg"
+                  )}
+                >
+                  <div className="relative h-40 overflow-hidden">
                     {img && (
                       <Image 
                         src={img.imageUrl} 
-                        alt={loc.name} 
+                        alt={loc.alt} 
                         fill 
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        className={cn(
+                          "object-cover transition-all duration-700",
+                          isActive ? "scale-110 grayscale-0" : "scale-100 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-80"
+                        )}
                         data-ai-hint={img.imageHint}
                       />
                     )}
-                    <div className="absolute inset-0 bg-primary/40 group-hover:bg-transparent transition-colors"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                       <Sparkles className="w-6 h-6 text-white" />
+                    <div className={cn(
+                      "absolute inset-0 bg-primary/20 transition-opacity duration-500",
+                      isActive ? "opacity-0" : "opacity-100 group-hover:opacity-20"
+                    )}></div>
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                       {!isActive && <Sparkles className="w-8 h-8 text-white drop-shadow-md opacity-60 group-hover:opacity-100 transition-opacity" />}
                     </div>
                   </div>
-                  <div className="p-6 text-center group-hover:bg-primary group-hover:text-white transition-colors duration-500">
-                    <h4 className="font-bold text-lg mb-2">{loc.name}</h4>
-                    <p className="text-[10px] text-secondary font-bold uppercase tracking-widest mb-4 group-hover:text-white/60">{loc.crowd}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed group-hover:text-white/80">{loc.advice}</p>
+
+                  <div className="p-6 flex flex-col flex-grow bg-white">
+                    <h4 className="font-bold text-xl mb-1 text-primary">{loc.name}</h4>
+                    <p className="text-[10px] text-secondary font-bold uppercase tracking-widest mb-4">
+                      {loc.crowd}
+                    </p>
+                    
+                    {/* Detailed Content - Smooth Expansion */}
+                    <div className={cn(
+                      "overflow-hidden transition-all duration-500 space-y-4",
+                      isActive ? "max-h-[500px] opacity-100 mt-2" : "max-h-0 opacity-0"
+                    )}>
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-bold text-primary/40 uppercase block">人群特点</span>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{loc.audience}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-bold text-primary/40 uppercase block">消费场景</span>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{loc.scene}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-bold text-primary/40 uppercase block">推荐产品</span>
+                        <p className="text-xs font-medium text-primary leading-relaxed">{loc.products}</p>
+                      </div>
+                      <div className="bg-secondary/[0.03] p-3 rounded-xl border border-secondary/10">
+                        <span className="text-[10px] font-bold text-secondary uppercase block mb-1">开店建议</span>
+                        <p className="text-[11px] text-primary/80 italic leading-snug">{loc.advice}</p>
+                      </div>
+                    </div>
+
+                    {!isActive && (
+                      <div className="mt-auto flex items-center justify-center pt-2">
+                        <Info className="w-4 h-4 text-primary/20 group-hover:text-secondary transition-colors" />
+                      </div>
+                    )}
                   </div>
                 </div>
               );
@@ -460,18 +561,15 @@ export default function Home() {
             <Button 
               size="lg" 
               onClick={() => scrollToContact('加盟咨询')}
-              className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-12 h-16 text-xl shadow-2xl shadow-secondary/20 transition-all active:scale-95"
+              className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-12 h-16 text-xl shadow-2xl shadow-secondary/20 transition-all active:scale-95 border-none"
             >
               立即咨询加盟
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              onClick={() => {
-                const el = document.getElementById('menu');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="border-secondary text-secondary hover:bg-secondary hover:text-white rounded-full px-12 h-16 text-xl transition-all"
+              onClick={() => scrollToSection('menu')}
+              className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white rounded-full px-12 h-16 text-xl transition-all shadow-lg hover:shadow-secondary/20"
             >
               查看品牌手册
             </Button>
